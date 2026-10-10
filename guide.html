@@ -1,11 +1,11 @@
 <!DOCTYPE html><html lang="he" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>מדריך · Studio Image Photography</title><meta name="description" content="מדריכי צילום אונליין מאת Studio Image Photography"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500&family=Heebo:wght@300;400;500&display=swap" rel="stylesheet"><link rel="stylesheet" href="style.css">
 <script src="config.js"></script><script src="site.js"></script></head><body>
-<main class="guide" id="m"></main>
+<main class="guide" id="m"></main><div id="rev"></div>
 <script>const id=new URLSearchParams(location.search).get("id"),g=C.guides.find(x=>x.id==id)||C.guides[0];document.title=g.title+" · Studio Image Photography";
 $("#m").innerHTML=`<div class="ph"><img src="${g.image}" alt="${g.title}">${tag(g)}</div><div>
-<a class="back" href="index.html#guides">→ חזרה לכל המדריכים</a><div class="eyebrow" style="margin-top:2.5rem">מדריך · ${g.level||""}</div><h1>${g.title}</h1><p class="lead">${g.description}</p>
+<a class="back" href="index.html#guides">→ חזרה לכל המדריכים</a><div class="eyebrow" style="margin-top:2.5rem">מדריך · ${g.level||""}</div><h1>${g.title}</h1>${ratingLine(g.id)}<p class="lead">${g.description}</p>
 <div class="h4">מה תלמדו</div><ul>${g.topics.map((t,i)=>`<li><span>${String(i+1).padStart(2,"0")}</span>${t}</li>`).join("")}</ul>
 <div class="buy"><div class="eyebrow" style="margin-bottom:1rem">רכישה חד-פעמית</div><div class="p">${nis(g.price)}</div>
 <a class="btn fill" href="${paypal(g)}" target="_blank" rel="noopener">לרכישה מאובטחת ב-PayPal</a>
-<ol><li>01 · התשלום מתבצע במערכת המאובטחת של PayPal</li><li>02 · המדריך נשלח אליכם ידנית במייל, בדרך כלל תוך 24 שעות</li><li>03 · שאלות? <a href="mailto:${C.contactEmail}" style="color:var(--gold)">${C.contactEmail}</a></li></ol></div></div>`;mount(true);</script></body></html>
+<ol><li>01 · התשלום מתבצע במערכת המאובטחת של PayPal</li><li>02 · המדריך נשלח אליכם ידנית במייל, בדרך כלל תוך 24 שעות</li><li>03 · שאלות? <a href="mailto:${C.contactEmail}" style="color:var(--gold)">${C.contactEmail}</a></li></ol></div></div>`;$("#rev").outerHTML=reviewsSection(g.id);initForm();mount(true);</script></body></html>

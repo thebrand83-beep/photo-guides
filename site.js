@@ -11,5 +11,29 @@ function mount(solid){document.body.insertAdjacentHTML("afterbegin",header(solid
  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}}),{threshold:.12});
  document.querySelectorAll(".rv").forEach(el=>io.observe(el));}
 function card(g){return `<a class="card rv" href="guide.html?id=${g.id}"><div class="ph"><img src="${g.image}" alt="${g.title}">${tag(g)}</div>
-<div class="meta"><h3>${g.title}</h3><span class="price">${nis(g.price)}</span></div><div class="lvl">${g.level||""}</div><span class="more">לפרטי המדריך ←</span></a>`}
+<div class="meta"><h3>${g.title}</h3><span class="price">${nis(g.price)}</span></div><div class="lvl">${g.level||""}</div>${ratingLine(g.id)}<span class="more">לפרטי המדריך ←</span></a>`}
 function paypal(g){return "https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business="+encodeURIComponent(C.paypalEmail)+"&item_name="+encodeURIComponent(g.title)+"&item_number="+encodeURIComponent(g.id)+"&amount="+g.price+"&currency_code="+C.currency+"&no_shipping=1"}
+const STAR='<svg viewBox="0 0 24 24"><path d="M12 2.6l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.4l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/></svg>';
+const stars=r=>`<span class="stars" aria-label="${r} מתוך 5">${[1,2,3,4,5].map(i=>`<i class="${i<=Math.round(r)?"on":""}">${STAR}</i>`).join("")}</span>`;
+const revsFor=id=>(C.reviews||[]).filter(r=>!id||r.guide===id);
+function avg(id){const r=revsFor(id);return r.length?{n:r.length,a:r.reduce((s,x)=>s+x.rating,0)/r.length}:null}
+function ratingLine(id){const a=avg(id);return a?`<div class="rating">${stars(a.a)}<b>${a.a.toFixed(1)}</b><span>(${a.n} ${a.n==1?"ביקורת":"ביקורות"})</span></div>`:`<div class="rating none">טרם דורג</div>`}
+function reviewCard(r){const g=C.guides.find(x=>x.id===r.guide);return `<figure class="review rv">${r.example?'<span class="tag">דוגמה</span>':""}${stars(r.rating)}<blockquote>״${r.text}״</blockquote><figcaption><b>${r.name}</b>${g?`<span>${g.title}</span>`:""}</figcaption></figure>`}
+function reviewsSection(id){const list=revsFor(id);const opts=C.guides.map(g=>`<option value="${g.id}"${g.id===id?" selected":""}>${g.title}</option>`).join("");
+return `<section class="block reviews" id="reviews"><div class="wrap"><div class="head rv"><div><div class="eyebrow">ביקורות</div><h2>${id?"מה אומרים על המדריך":"מה אומרים הלומדים"}</h2></div>${id?ratingLine(id):""}</div>
+<div class="rgrid">${list.length?`<div class="rlist">${list.map(reviewCard).join("")}</div>`:`<div class="empty rv"><div class="empty-stars">${stars(0)}</div><h3>היו הראשונים לדרג</h3><p>עדיין אין ביקורות${id?" על המדריך הזה":""}. רכשתם מדריך? נשמח לשמוע מה חשבתם.</p></div>`}
+<form class="rform rv" id="rform" novalidate><div class="eyebrow">כתבו ביקורת</div><h3>שתפו את החוויה שלכם</h3>
+<label>שם<input name="name" required maxlength="60" placeholder="השם שיוצג בביקורת"></label>
+<label>מדריך<select name="guide" required>${id?"":'<option value="" disabled selected>בחרו מדריך</option>'}${opts}</select></label>
+<div class="lbl">דירוג<div class="starpick" role="radiogroup">${[1,2,3,4,5].map(i=>`<button type="button" data-v="${i}" aria-label="${i} כוכבים">${STAR}</button>`).join("")}</div><input type="hidden" name="rating"></div>
+<label>הביקורת שלכם<textarea name="text" required rows="4" maxlength="800" placeholder="מה למדתם? מה אהבתם?"></textarea></label>
+<button class="btn fill" type="submit">שליחת ביקורת</button><p class="fmsg" id="fmsg">ביקורות מתפרסמות לאחר אישור.</p></form></div></div></section>`}
+function initForm(){const f=document.getElementById("rform");if(!f)return;const btns=[...f.querySelectorAll(".starpick button")],h=f.rating,m=document.getElementById("fmsg");
+const paint=v=>btns.forEach(b=>b.classList.toggle("on",+b.dataset.v<=v));
+btns.forEach(b=>{b.onmouseenter=()=>paint(+b.dataset.v);b.onclick=()=>{h.value=b.dataset.v;paint(+h.value)}});f.querySelector(".starpick").onmouseleave=()=>paint(+h.value||0);
+f.onsubmit=async e=>{e.preventDefault();m.className="fmsg";
+ if(!f.name.value.trim()||!f.guide.value||!h.value||!f.text.value.trim()){m.textContent="נא למלא שם, מדריך, דירוג וטקסט.";m.classList.add("err");return}
+ if(!C.reviewsEndpoint){m.textContent="מערכת הביקורות עדיין בהקמה. בינתיים אפשר לשלוח את הביקורת במייל: "+C.contactEmail;m.classList.add("err");return}
+ try{const r=await fetch(C.reviewsEndpoint,{method:"POST",headers:{Accept:"application/json"},body:new FormData(f)});if(!r.ok)throw 0;
+  f.reset();h.value="";paint(0);m.textContent="תודה! הביקורת התקבלה ותפורסם לאחר אישור.";m.classList.add("ok")}
+ catch{m.textContent="השליחה נכשלה. נסו שוב או כתבו לנו: "+C.contactEmail;m.classList.add("err")}}}

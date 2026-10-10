@@ -96,3 +96,28 @@ footer p,footer a{color:var(--muted);font-size:.9rem;display:block;margin:0 0 .5
 
 @media(max-width:900px){.hero h1{font-size:2.6rem}.hero p{font-size:1rem}.btn{padding:.9rem 1.5rem}.hero .wrap{padding-bottom:8vh}}
 @media(max-width:600px){.nav{padding:1.2rem 5vw}.brand{font-size:.85rem;letter-spacing:.12em;white-space:nowrap}.brand small{font-size:.5rem;letter-spacing:.3em}.nav nav a{margin-inline-start:.9rem;font-size:.82rem;white-space:nowrap}.hero .wrap{padding-top:6rem}}
+/* reviews */
+.stars{display:inline-flex;gap:3px}.stars i{width:15px;height:15px;display:block}.stars svg{width:100%;height:100%;fill:none;stroke:var(--gold);stroke-width:1.3}.stars i.on svg{fill:var(--gold)}
+.rating{display:flex;align-items:center;gap:.6rem;margin-top:.6rem;font-size:.88rem;color:var(--muted)}.rating b{color:var(--paper);font-weight:400;font-family:"Frank Ruhl Libre",serif;font-size:1rem}
+.rating.none{font-size:.82rem;color:#6a645c}
+.guide .rating{margin:-.5rem 0 1.5rem}.head .rating{margin:0}
+.reviews{border-top:1px solid var(--line)}
+.rgrid{display:grid;grid-template-columns:1.25fr 1fr;gap:5vw;align-items:start}
+.rlist{display:grid;gap:1.5rem}
+.review{position:relative;margin:0;padding:2.4rem;border:1px solid var(--line);background:var(--ink2)}
+.review .tag{inset-inline-start:auto;inset-inline-end:1.2rem;top:1.2rem}
+.review blockquote{margin:1.3rem 0 1.6rem;font-family:"Frank Ruhl Libre",serif;font-size:1.35rem;line-height:1.6;font-weight:300}
+.review figcaption{display:flex;gap:1rem;align-items:baseline;border-top:1px solid var(--line);padding-top:1.1rem}.review figcaption b{font-weight:400}.review figcaption span{color:var(--muted);font-size:.85rem}
+.empty{padding:4.5rem 2.5rem;border:1px solid var(--line);text-align:center;background:linear-gradient(180deg,var(--ink2),transparent)}
+.empty .stars i{width:26px;height:26px}.empty h3{font-size:2rem;margin:1.6rem 0 .8rem}.empty p{color:var(--muted);margin:0 auto;max-width:24rem}
+.rform{padding:2.6rem;border:1px solid var(--line);background:var(--ink2)}.rform h3{font-size:1.7rem;margin:.6rem 0 1.8rem}
+.rform label,.rform .lbl{display:block;font-size:.85rem;color:var(--muted);margin-bottom:1.3rem}
+.rform input,.rform select,.rform textarea{display:block;width:100%;margin-top:.5rem;background:transparent;border:0;border-bottom:1px solid var(--line);color:var(--paper);font:300 1rem "Heebo",sans-serif;padding:.6rem 0;outline:none;transition:border-color .3s;border-radius:0;resize:vertical}
+.rform select option{background:var(--ink2)}.rform input:focus,.rform select:focus,.rform textarea:focus{border-color:var(--gold)}
+.rform ::placeholder{color:#5f5a53}
+.starpick{display:flex;gap:.4rem;margin-top:.6rem}
+.starpick button{background:none;border:0;padding:0;width:30px;height:30px;cursor:pointer;transition:transform .2s}.starpick button:hover{transform:scale(1.12)}
+.starpick svg{width:100%;height:100%;fill:none;stroke:var(--gold);stroke-width:1.2;transition:fill .2s}.starpick button.on svg{fill:var(--gold)}
+.rform .btn{width:100%;justify-content:center;margin-top:.6rem}
+.fmsg{font-size:.85rem;color:var(--muted);margin:1rem 0 0;text-align:center}.fmsg.err{color:#d9a37a}.fmsg.ok{color:var(--gold)}
+@media(max-width:900px){.rgrid{grid-template-columns:1fr}.review,.rform{padding:1.8rem}}

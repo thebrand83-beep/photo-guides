@@ -3,6 +3,8 @@ window.SITE_CONFIG = {
   paypalEmail: "YOUR_PAYPAL_EMAIL@example.com", // ← החלף בכתובת חשבון ה-PayPal שלך
   currency: "ILS",
   contactEmail: "YOUR_EMAIL@example.com",       // ← החלף במייל ליצירת קשר
+  // כתובת טופס לקבלת ביקורות (למשל Formspree: https://formspree.io/f/XXXX). השאר ריק עד שתגדיר.
+  reviewsEndpoint: "",
   bookingUrl: "https://studioimagebooking.base44.app",
   // example: true מציג תגית "דוגמה" קטנה. מחק את השורה כשהמדריך אמיתי.
   guides: [
@@ -21,5 +23,11 @@ window.SITE_CONFIG = {
       short: "תיאור לדוגמה. החלף בתיאור קצר של המדריך.",
       description: "טקסט לדוגמה. החלף בתיאור המלא של המדריך.",
       topics: ["נושא לדוגמה ראשון", "נושא לדוגמה שני", "נושא לדוגמה שלישי"] }
+  ],
+  // ביקורות מאושרות בלבד. guide = id של המדריך, rating = 1 עד 5.
+  // הביקורת הבאה היא דוגמה בלבד. מחק אותה לפני העלייה לאוויר.
+  reviews: [
+    { example: true, guide: "portrait", name: "שם לדוגמה", rating: 5, date: "2026-10",
+      text: "זוהי ביקורת לדוגמה בלבד, כדי להמחיש איך ביקורת מאושרת תוצג באתר." }
   ]
 };

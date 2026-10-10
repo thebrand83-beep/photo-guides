@@ -24,5 +24,7 @@
     "intro": "לשאלות על המדריכים, על רכישה או על מסירה, אפשר לפנות ישירות במייל."
   },
   "supabaseUrl": "https://aqsdvzesnqtmnlkyrkeo.supabase.co",
-  "supabaseAnonKey": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFxc2R2emVzbnF0bW5sa3lya2VvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTE2NDgwNzcsImV4cCI6MjEwNzIyNDA3N30.iCIYiRmwS0VNI9jazNSuA_uQwRcXC8IYwzRf4lxiUXw"
+  "supabaseAnonKey": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFxc2R2emVzbnF0bW5sa3lya2VvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTE2NDgwNzcsImV4cCI6MjEwNzIyNDA3N30.iCIYiRmwS0VNI9jazNSuA_uQwRcXC8IYwzRf4lxiUXw",
+  "phone": "050-7888160",
+  "whatsappText": "היי, הגעתי מאתר מדריכי הצילום"
 }

@@ -160,3 +160,10 @@ footer .fh{font-size:.85rem;letter-spacing:.04em;color:var(--gold);margin:0 0 1.
 .btn.danger{border-color:#8a4b3a;color:#e0a48f}.btn.danger:hover{background:#8a4b3a;color:var(--paper)}
 .aempty{padding:2rem;border:1px dashed var(--line);color:var(--muted);text-align:center}
 .cmslink{margin:0 0 2.5rem;padding:.7rem 1.4rem;font-size:.88rem}
+/* phone buttons */
+.pbtns{display:flex;gap:.8rem;flex-wrap:wrap;margin-top:2.2rem}
+.pbtn{min-height:48px;gap:.7rem;padding:.85rem 1.8rem}.pbtn svg{width:18px;height:18px;fill:currentColor;flex:none}
+.pbtn.wa{border-color:var(--line)}.pbtn.wa:hover{background:#25d366;border-color:#25d366;color:#0e0d0c}
+.pbtns.lg .pbtn:first-child{background:var(--gold);color:var(--ink);font-weight:500}.pbtns.lg .pbtn:first-child:hover{background:var(--paper)}
+footer .pbtns.sm{margin:.8rem 0 .6rem;gap:.6rem}footer .pbtns.sm .pbtn{display:inline-flex;margin:0;padding:.6rem 1.1rem;min-height:44px;color:var(--paper);font-size:.85rem}
+@media(max-width:600px){.pbtns.lg{display:grid;grid-template-columns:1fr 1fr}.pbtns.lg .pbtn{justify-content:center;padding:.9rem 1rem}}

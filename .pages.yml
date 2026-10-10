@@ -20,6 +20,13 @@ content:
         label: מייל ליצירת קשר
         type: string
         required: true
+      - name: phone
+        label: טלפון
+        type: string
+        description: לדוגמה 050-7888160. משמש לכפתורי החיוג והוואטסאפ.
+      - name: whatsappText
+        label: הודעת פתיחה בוואטסאפ
+        type: string
       - name: reviewsEndpoint
         label: כתובת טופס הביקורות (Formspree)
         type: string

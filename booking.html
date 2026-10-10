@@ -1,0 +1,61 @@
+<!DOCTYPE html><html lang="he" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>קביעת פגישה · Studio Image Photography</title><meta name="description" content="מדריכי צילום מעשיים מצלם דור שני עם למעלה מעשור של ניסיון. לומדים בקצב שלכם, מכל מקום. Studio Image Photography, חיפה והקריות."><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500&family=Heebo:wght@300;400;500&display=swap"><link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500&family=Heebo:wght@300;400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'"><noscript><link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500&family=Heebo:wght@300;400;500&display=swap" rel="stylesheet"></noscript><meta name="theme-color" content="#0e0d0c"><link rel="icon" type="image/png" href="favicon.png"><link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta property="og:type" content="website"><meta property="og:locale" content="he_IL"><meta property="og:site_name" content="Studio Image Photography"><meta property="og:title" content="מדריכי צילום אונליין | Studio Image Photography"><meta property="og:description" content="מדריכי צילום מעשיים מצלם דור שני עם למעלה מעשור של ניסיון. לומדים בקצב שלכם, מכל מקום. Studio Image Photography, חיפה והקריות."><meta property="og:url" content="https://thebrand83-beep.github.io/photo-guides/booking.html"><meta property="og:image" content="https://thebrand83-beep.github.io/photo-guides/img/og.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="מצלמה וינטג׳ ותמונות על מפה">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="מדריכי צילום אונליין | Studio Image Photography"><meta name="twitter:description" content="מדריכי צילום מעשיים מצלם דור שני עם למעלה מעשור של ניסיון. לומדים בקצב שלכם, מכל מקום. Studio Image Photography, חיפה והקריות."><meta name="twitter:image" content="https://thebrand83-beep.github.io/photo-guides/img/og.jpg"><link rel="stylesheet" href="style.css">
+<script src="site.js"></script></head><body>
+<main class="page bk"><div class="eyebrow">קביעת פגישה</div><h1>בואו נקבע מועד.</h1><p>בחרו שירות, תאריך ושעה פנויים. הבקשה תגיע אליי לאישור, ואחזור אליכם בוואטסאפ.</p>
+<form id="bf" class="bkform" novalidate>
+<div class="step"><div class="h4"><span>01</span> סוג השירות</div><div class="svc" id="svc"><div class="aempty">טוען...</div></div></div>
+<div class="step"><div class="h4"><span>02</span> תאריך</div>
+<div class="cal"><div class="calhead"><button type="button" class="calnav" id="prev" aria-label="החודש הקודם">→</button><b id="mon"></b><button type="button" class="calnav" id="next" aria-label="החודש הבא">←</button></div>
+<div class="dows"><span>א׳</span><span>ב׳</span><span>ג׳</span><span>ד׳</span><span>ה׳</span><span>ו׳</span><span>ש׳</span></div><div class="days" id="days"></div></div></div>
+<div class="step"><div class="h4"><span>03</span> שעה</div><div class="slots" id="slots"><div class="hint">בחרו תאריך כדי לראות שעות פנויות.</div></div></div>
+<div class="step"><div class="h4"><span>04</span> פרטים</div><div class="rform flat">
+<label>שם מלא<input name="name" required maxlength="80" autocomplete="name"></label>
+<label>טלפון<input name="phone" type="tel" required maxlength="20" inputmode="tel" autocomplete="tel" dir="ltr" placeholder="050-0000000"></label>
+<label>מייל (לא חובה)<input name="email" type="email" maxlength="120" autocomplete="email" dir="ltr"></label>
+<label>הערות (לא חובה)<textarea name="notes" rows="3" maxlength="1000" placeholder="מה תרצו לצלם? כמה משתתפים?"></textarea></label>
+<input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);opacity:0;pointer-events:none">
+</div></div>
+<div class="summary" id="sum" hidden></div>
+<button class="btn fill bksubmit" type="submit">שליחת בקשה לתיאום</button><p class="fmsg" id="bm">המועד נשמר עבורכם עד לאישור.</p></form>
+<div class="done" id="done" hidden><div class="eyebrow">הבקשה התקבלה</div><h2>תודה! קיבלתי את הבקשה.</h2><p id="donetxt"></p><div class="btn-row"><a class="btn" href="index.html">חזרה לאתר</a></div></div>
+</main>
+<script>boot(()=>{mount(true);
+const TZ="Asia/Jerusalem",H={apikey:C.supabaseAnonKey,Authorization:"Bearer "+C.supabaseAnonKey,"Content-Type":"application/json"};
+const rpc=(fn,body)=>fetch(C.supabaseUrl+"/rest/v1/rpc/"+fn,{method:"POST",headers:H,body:JSON.stringify(body)});
+const ymd=d=>d.toLocaleDateString("en-CA",{timeZone:TZ});
+const tfmt=s=>new Date(s).toLocaleTimeString("he-IL",{timeZone:TZ,hour:"2-digit",minute:"2-digit"});
+const dfmt=s=>new Date(s).toLocaleDateString("he-IL",{timeZone:TZ,weekday:"long",day:"numeric",month:"long"});
+let services=[],svc=null,month=new Date(),slotsByDay={},day=null,slot=null;month.setDate(1);
+async function loadServices(){const r=await fetch(C.supabaseUrl+"/rest/v1/services?select=id,name,duration_min&active=eq.true&order=sort",{headers:H});services=r.ok?await r.json():[];
+ $("#svc").innerHTML=services.length?services.map(s=>`<label class="opt"><input type="radio" name="svc" value="${esc(s.id)}"><span><b>${esc(s.name)}</b><small>${s.duration_min} דקות</small></span></label>`).join(""):'<div class="aempty">אין כרגע שירותים פתוחים להזמנה.</div>';
+ $("#svc").onchange=e=>{svc=services.find(s=>s.id===e.target.value);day=slot=null;loadMonth()};}
+async function loadMonth(){const y=month.getFullYear(),m=month.getMonth();$("#mon").textContent=month.toLocaleDateString("he-IL",{month:"long",year:"numeric"});
+ const from=`${y}-${String(m+1).padStart(2,"0")}-01`,last=new Date(y,m+1,0).getDate(),to=`${y}-${String(m+1).padStart(2,"0")}-${last}`;
+ slotsByDay={};$("#days").classList.add("loading");
+ if(svc){const r=await rpc("get_availability",{p_service:svc.id,p_from:from,p_to:to});const list=r.ok?await r.json():[];list.forEach(x=>{const k=ymd(new Date(x.slot_start));(slotsByDay[k]=slotsByDay[k]||[]).push(x.slot_start)})}
+ $("#days").classList.remove("loading");const first=new Date(y,m,1).getDay();let h="";for(let i=0;i<first;i++)h+="<span></span>";
+ for(let d=1;d<=last;d++){const k=`${y}-${String(m+1).padStart(2,"0")}-${String(d).padStart(2,"0")}`,av=!!slotsByDay[k];h+=`<button type="button" class="day${av?" av":""}${k===day?" sel":""}" data-k="${k}" ${av?"":"disabled"} aria-label="${d}">${d}</button>`}
+ $("#days").innerHTML=h;const now=new Date();$("#prev").disabled=y===now.getFullYear()&&m===now.getMonth();renderSlots();
+ if(svc&&!Object.keys(slotsByDay).length)$("#slots").innerHTML='<div class="hint">אין מועדים פנויים בחודש הזה. נסו את החודש הבא.</div>';}
+function renderSlots(){if(!day||!slotsByDay[day]){if(svc)$("#slots").innerHTML='<div class="hint">בחרו תאריך מסומן כדי לראות שעות פנויות.</div>';else $("#slots").innerHTML='<div class="hint">בחרו קודם סוג שירות.</div>';sum();return}
+ $("#slots").innerHTML=slotsByDay[day].map(s=>`<button type="button" class="slot${s===slot?" sel":""}" data-s="${s}">${tfmt(s)}</button>`).join("");sum()}
+function sum(){const e=$("#sum");if(svc&&slot){e.hidden=false;e.innerHTML=`<b>${esc(svc.name)}</b> · ${dfmt(slot)} · שעה ${tfmt(slot)} · ${svc.duration_min} דקות`}else e.hidden=true}
+$("#days").onclick=e=>{const b=e.target.closest(".day.av");if(!b)return;day=b.dataset.k;slot=null;document.querySelectorAll(".day").forEach(x=>x.classList.toggle("sel",x===b));renderSlots();if(innerWidth<700)$("#slots").scrollIntoView({behavior:"smooth",block:"center"})};
+$("#slots").onclick=e=>{const b=e.target.closest(".slot");if(!b)return;slot=b.dataset.s;renderSlots()};
+$("#prev").onclick=()=>{month.setMonth(month.getMonth()-1);day=slot=null;loadMonth()};$("#next").onclick=()=>{month.setMonth(month.getMonth()+1);day=slot=null;loadMonth()};
+$("#bf").onsubmit=async e=>{e.preventDefault();const f=e.target,m=$("#bm");m.className="fmsg";
+ if(f._honey.value)return;
+ if(!svc||!slot){m.textContent="בחרו שירות, תאריך ושעה.";m.classList.add("err");return}
+ if(f.name.value.trim().length<2||!/^[0-9+\- ()]{9,20}$/.test(f.phone.value.trim())){m.textContent="נא למלא שם וטלפון תקין.";m.classList.add("err");return}
+ const btn=f.querySelector("[type=submit]");btn.disabled=true;m.textContent="שולח...";
+ try{const r=await rpc("create_booking",{p_service:svc.id,p_start:slot,p_name:f.name.value.trim(),p_phone:f.phone.value.trim(),p_email:f.email.value.trim(),p_notes:f.notes.value.trim()});
+  if(!r.ok){const j=await r.json().catch(()=>({}));if(/unavailable/.test(j.message||"")){m.textContent="המועד הזה נתפס הרגע. בחרו שעה אחרת.";m.classList.add("err");slot=null;await loadMonth();return}
+   if(/rate/.test(j.message||"")){m.textContent="כבר יש לכם בקשות פתוחות. אחזור אליכם בהקדם.";m.classList.add("err");return}throw 0}
+  const when=dfmt(slot)+" בשעה "+tfmt(slot);
+  if(C.bookingNotifyEmail)fetch("https://formsubmit.co/ajax/"+C.bookingNotifyEmail,{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify({_subject:"בקשת פגישה חדשה: "+svc.name+" · "+when,_template:"table",_captcha:"false",שירות:svc.name,מועד:when,שם:f.name.value.trim(),טלפון:f.phone.value.trim(),מייל:f.email.value.trim()||"-",הערות:f.notes.value.trim()||"-",ניהול:location.href.replace(/booking\.html.*$/,"bookings-admin.html")})}).catch(()=>{});
+  $("#bf").hidden=true;$("#done").hidden=false;$("#donetxt").textContent=`ביקשתם ${svc.name} ל${when}. המועד שמור עבורכם, ואאשר אותו מולכם בוואטסאפ בהקדם.`;scrollTo({top:0,behavior:"smooth"})}
+ catch(_){m.textContent="השליחה נכשלה. נסו שוב או התקשרו: "+(C.phone||C.contactEmail);m.classList.add("err")}
+ finally{btn.disabled=false}};
+loadServices().then(loadMonth);});</script></body></html>

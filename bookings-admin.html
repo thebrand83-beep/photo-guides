@@ -1,0 +1,81 @@
+<!DOCTYPE html><html lang="he" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ניהול פגישות · Studio Image Photography</title><meta name="robots" content="noindex"><meta name="description" content="מדריכי צילום מעשיים מצלם דור שני עם למעלה מעשור של ניסיון. לומדים בקצב שלכם, מכל מקום. Studio Image Photography, חיפה והקריות."><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500&family=Heebo:wght@300;400;500&display=swap"><link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500&family=Heebo:wght@300;400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'"><noscript><link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500&family=Heebo:wght@300;400;500&display=swap" rel="stylesheet"></noscript><meta name="theme-color" content="#0e0d0c"><link rel="icon" type="image/png" href="favicon.png"><link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta property="og:type" content="website"><meta property="og:locale" content="he_IL"><meta property="og:site_name" content="Studio Image Photography"><meta property="og:title" content="מדריכי צילום אונליין | Studio Image Photography"><meta property="og:description" content="מדריכי צילום מעשיים מצלם דור שני עם למעלה מעשור של ניסיון. לומדים בקצב שלכם, מכל מקום. Studio Image Photography, חיפה והקריות."><meta property="og:url" content="https://thebrand83-beep.github.io/photo-guides/admin.html"><meta property="og:image" content="https://thebrand83-beep.github.io/photo-guides/img/og.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="מצלמה וינטג׳ ותמונות על מפה">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="מדריכי צילום אונליין | Studio Image Photography"><meta name="twitter:description" content="מדריכי צילום מעשיים מצלם דור שני עם למעלה מעשור של ניסיון. לומדים בקצב שלכם, מכל מקום. Studio Image Photography, חיפה והקריות."><meta name="twitter:image" content="https://thebrand83-beep.github.io/photo-guides/img/og.jpg"><link rel="stylesheet" href="style.css">
+<script src="site.js"></script></head><body>
+<main class="page adm wide"><div class="eyebrow">אזור ניהול</div><h1>ניהול פגישות</h1>
+<div class="btn-row" style="margin:0 0 2.5rem"><a class="btn cmslink" style="margin:0" href="reviews-admin.html">ניהול ביקורות</a><a class="btn cmslink" style="margin:0" href="https://app.pagescms.org/thebrand83-beep/photo-guides/main/file/site" target="_blank" rel="noopener">עריכת תוכן האתר (Pages CMS) ↗</a></div>
+<div id="v-login" class="apanel" hidden><p>התחברות עם המייל והסיסמה של המנהל (אותם פרטים של ניהול הביקורות).</p>
+<form id="f-login" class="rform" novalidate><label>מייל<input name="email" type="email" autocomplete="username" required></label><label>סיסמה<input name="password" type="password" autocomplete="current-password" required></label>
+<button class="btn fill" type="submit">התחברות</button><p class="fmsg" id="m-login"></p><a class="linkbtn" href="reviews-admin.html">שכחתי סיסמה</a></form></div>
+<div id="v-app" hidden><div class="abar"><span id="who"></span><button class="linkbtn" id="b-out" type="button">התנתקות</button></div>
+<div class="tabs" role="tablist"><button class="tab on" data-t="pending">ממתינות <span class="cnt" id="c-pending"></span></button><button class="tab" data-t="approved">מאושרות <span class="cnt" id="c-approved"></span></button><button class="tab" data-t="rejected">נדחו <span class="cnt" id="c-rejected"></span></button><button class="tab" data-t="settings">זמינות והגדרות</button></div>
+<p class="fmsg" id="m-app"></p>
+<div id="p-list" class="alist"></div>
+<div id="p-settings" hidden>
+ <section class="aset"><div class="h4">חסימת תאריכים ושעות</div><form id="f-block" class="rform flat grid3">
+  <label>מתאריך<input type="date" name="d1" required></label><label>עד תאריך<input type="date" name="d2"></label><label>סיבה (לא חובה)<input name="reason" maxlength="120" placeholder="חופשה, אירוע..."></label>
+  <label>משעה (ריק = כל היום)<input type="time" name="t1"></label><label>עד שעה<input type="time" name="t2"></label><div><button class="btn fill" type="submit">הוספת חסימה</button></div></form>
+  <div id="l-blocks" class="alist"></div></section>
+ <section class="aset"><div class="h4">שעות פעילות שבועיות</div><p class="note2">פורמט: 09:00-13:00, 16:00-19:00. ריק = סגור.</p><form id="f-hours" class="rform flat">
+  <div id="hours" class="hours"></div>
+  <div class="grid3"><label>אורך משבצת (דקות)<input type="number" name="slot" min="10" max="240" required></label><label>התראה מינימלית (שעות)<input type="number" name="notice" min="0" max="720" required></label><label>כמה ימים קדימה<input type="number" name="ahead" min="1" max="365" required></label></div>
+  <button class="btn fill" type="submit">שמירת שעות והגדרות</button></form></section>
+ <section class="aset"><div class="h4">שירותים</div><div id="l-svc" class="alist"></div>
+  <form id="f-svc" class="rform flat grid3"><label>שם שירות חדש<input name="name" required maxlength="80"></label><label>משך (דקות)<input type="number" name="dur" min="10" max="600" value="60" required></label><div><button class="btn" type="submit">הוספת שירות</button></div></form></section>
+</div></div></main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script>boot(()=>{mount(true);
+const sb=supabase.createClient(C.supabaseUrl,C.supabaseAnonKey,{auth:{persistSession:true}});
+const TZ="Asia/Jerusalem",DAYS=["ראשון","שני","שלישי","רביעי","חמישי","שישי","שבת"];
+const show=v=>["login","app"].forEach(x=>$("#v-"+x).hidden=x!==v);
+const msg=(t,c)=>{const e=$("#m-app");e.textContent=t;e.className="fmsg"+(c?" "+c:"")};
+const dfmt=s=>new Date(s).toLocaleDateString("he-IL",{timeZone:TZ,weekday:"long",day:"numeric",month:"long",year:"numeric"});
+const tfmt=s=>new Date(s).toLocaleTimeString("he-IL",{timeZone:TZ,hour:"2-digit",minute:"2-digit"});
+// convert local Israel date+time to ISO with correct offset
+function ilISO(date,time){const guess=new Date(date+"T"+time+":00Z");const off=(new Date(guess.toLocaleString("en-US",{timeZone:TZ}))-new Date(guess.toLocaleString("en-US",{timeZone:"UTC"})));return new Date(guess.getTime()-off).toISOString()}
+const wa=(phone,text)=>"https://wa.me/"+intl(phone)+"?text="+encodeURIComponent(text);
+const site=location.href.replace(/[^/]*$/,"");
+function waText(b,ok){const when=dfmt(b.start_ts)+" בשעה "+tfmt(b.start_ts);return ok
+ ?`שלום ${b.name}, הפגישה שלך ב-Studio Image אושרה ✅\n${b.service_name||""}\n${when}\nאם משהו משתנה, אפשר לכתוב לי כאן. נתראה!\nזיו`
+ :`שלום ${b.name}, תודה שפנית ל-Studio Image. לצערי המועד שביקשת (${when}) אינו מתאים. אשמח לתאם מועד אחר: ${site}booking.html\nזיו`}
+let tab="pending",all=[];
+async function loadBookings(){const {data,error}=await sb.from("bookings").select("*").order("start_ts",{ascending:true});if(error){msg("שגיאה: "+error.message,"err");return}all=data;
+ ["pending","approved","rejected"].forEach(s=>$("#c-"+s).textContent=data.filter(b=>b.status===s).length);renderList()}
+function renderList(){if(tab==="settings")return;const now=Date.now();let l=all.filter(b=>b.status===tab);if(tab!=="pending")l=l.sort((a,b)=>(new Date(a.start_ts)<now)-(new Date(b.start_ts)<now)||new Date(a.start_ts)-new Date(b.start_ts));
+ $("#p-list").innerHTML=l.length?l.map(b=>`<article class="aitem${new Date(b.end_ts)<now?" past":""}" data-id="${b.id}"><div class="ahead"><b>${esc(b.name)}</b><span>${esc(b.service_name||b.service_id)}</span><time>${dfmt(b.start_ts)} · ${tfmt(b.start_ts)}–${tfmt(b.end_ts)}</time></div>
+ <div class="bkd"><a href="tel:+${intl(b.phone)}" dir="ltr">${esc(b.phone)}</a>${b.email?`<a href="mailto:${esc(b.email)}" dir="ltr">${esc(b.email)}</a>`:""}<span>נשלח ${new Date(b.created_at).toLocaleString("he-IL",{timeZone:TZ,dateStyle:"short",timeStyle:"short"})}</span></div>
+ ${b.notes?`<p>${esc(b.notes)}</p>`:""}<div class="aact">${b.status!=="approved"?'<button class="btn fill" data-act="approve">אישור + וואטסאפ</button>':""}${b.status!=="rejected"?'<button class="btn" data-act="reject">דחייה + וואטסאפ</button>':""}<a class="btn" href="${wa(b.phone,"שלום "+b.name+", ")}" target="_blank" rel="noopener">וואטסאפ</a><button class="btn danger" data-act="delete">מחיקה</button></div></article>`).join(""):'<div class="aempty">אין פגישות ברשימה הזו.</div>'}
+document.addEventListener("click",async e=>{const t=e.target.closest(".tab");if(t){tab=t.dataset.t;document.querySelectorAll(".tab").forEach(x=>x.classList.toggle("on",x===t));$("#p-list").hidden=tab==="settings";$("#p-settings").hidden=tab!=="settings";msg("");if(tab==="settings")loadSettings();else renderList();return}
+ const b=e.target.closest("[data-act]");if(!b)return;const card=b.closest("[data-id]"),id=card.dataset.id,act=b.dataset.act;
+ if(card.classList.contains("aitem")&&!card.classList.contains("blk")&&!card.classList.contains("svcrow")){const bk=all.find(x=>x.id===id);
+  if(act==="delete"){if(!confirm("למחוק את הפגישה לצמיתות?"))return;const r=await sb.from("bookings").delete().eq("id",id);r.error?msg(r.error.message,"err"):(msg("נמחק.","ok"),loadBookings());return}
+  const ok=act==="approve";const w=window.open(wa(bk.phone,waText(bk,ok)),"_blank");
+  const r=await sb.from("bookings").update({status:ok?"approved":"rejected",decided_at:new Date().toISOString()}).eq("id",id);
+  if(r.error){if(w)w.close();msg(/no_overlap|exclu/.test(r.error.message)?"יש כבר פגישה אחרת באותה שעה.":"הפעולה נכשלה: "+r.error.message,"err")}else{msg(ok?"הפגישה אושרה. שלחו את ההודעה בוואטסאפ שנפתח.":"הבקשה נדחתה. שלחו את ההודעה בוואטסאפ שנפתח.","ok");if(!w)msg("הפעולה נשמרה. החלון של וואטסאפ נחסם, לחצו על כפתור וואטסאפ בכרטיס.","ok");loadBookings()}}
+ if(card.classList.contains("blk")&&act==="delblock"){await sb.from("blocks").delete().eq("id",id);loadBlocks()}
+ if(card.classList.contains("svcrow")){const n=card.querySelector("[name=n]").value.trim(),d=+card.querySelector("[name=d]").value,a=card.querySelector("[name=a]").checked;
+  if(act==="savesvc"){const r=await sb.from("services").update({name:n,duration_min:d,active:a}).eq("id",id);r.error?msg(r.error.message,"err"):msg("השירות נשמר.","ok")}
+  if(act==="delsvc"){if(!confirm("למחוק את השירות? אם יש לו פגישות, אפשר רק לכבות אותו."))return;const r=await sb.from("services").delete().eq("id",id);r.error?msg("לא ניתן למחוק שירות שיש לו פגישות. כבו אותו במקום.","err"):loadServices()}}});
+async function loadBlocks(){const {data}=await sb.from("blocks").select("*").gte("end_ts",new Date().toISOString()).order("start_ts");
+ $("#l-blocks").innerHTML=(data||[]).length?data.map(x=>`<div class="aitem blk" data-id="${x.id}"><div class="ahead"><b>${dfmt(x.start_ts)} ${tfmt(x.start_ts)}</b><span>עד ${dfmt(x.end_ts)} ${tfmt(x.end_ts)}</span><time>${esc(x.reason||"")}</time><button class="btn danger sm" data-act="delblock">הסרה</button></div></div>`).join(""):'<div class="aempty">אין חסימות עתידיות.</div>'}
+async function loadServices(){const {data}=await sb.from("services").select("*").order("sort");
+ $("#l-svc").innerHTML=(data||[]).map(s=>`<div class="aitem svcrow" data-id="${esc(s.id)}"><div class="rform flat grid4"><label>שם<input name="n" value="${esc(s.name)}"></label><label>משך (דקות)<input name="d" type="number" min="10" max="600" value="${s.duration_min}"></label><label class="chk"><input name="a" type="checkbox" ${s.active?"checked":""}> פעיל באתר</label><div class="aact" style="margin:0"><button class="btn sm" data-act="savesvc">שמירה</button><button class="btn danger sm" data-act="delsvc">מחיקה</button></div></div></div>`).join("")}
+async function loadSettings(){const {data}=await sb.from("booking_settings").select("*").eq("id",1).single();if(!data)return;const f=$("#f-hours");
+ $("#hours").innerHTML=DAYS.map((d,i)=>`<label>${d}<input name="h${i}" value="${(data.hours[i]||[]).map(r=>r.join("-")).join(", ")}" dir="ltr" placeholder="סגור"></label>`).join("");
+ f.slot.value=data.slot_minutes;f.notice.value=data.min_notice_hours;f.ahead.value=data.max_days_ahead;loadBlocks();loadServices()}
+$("#f-hours").onsubmit=async e=>{e.preventDefault();const f=e.target,hours={};
+ for(let i=0;i<7;i++){const v=f["h"+i].value.trim();const rs=v?v.split(",").map(x=>x.trim().split("-").map(y=>y.trim())):[];
+  if(rs.some(r=>r.length!==2||r.some(t=>!/^([01]\d|2[0-3]):[0-5]\d$/.test(t))||r[0]>=r[1])){msg("פורמט שעות לא תקין ביום "+DAYS[i]+". דוגמה: 09:00-13:00","err");return}hours[i]=rs}
+ const r=await sb.from("booking_settings").update({hours,slot_minutes:+f.slot.value,min_notice_hours:+f.notice.value,max_days_ahead:+f.ahead.value}).eq("id",1);r.error?msg(r.error.message,"err"):msg("השעות וההגדרות נשמרו.","ok")};
+$("#f-block").onsubmit=async e=>{e.preventDefault();const f=e.target;if(!f.d1.value){msg("בחרו תאריך.","err");return}const d2=f.d2.value||f.d1.value;
+ let s,en;if(f.t1.value&&f.t2.value){s=ilISO(f.d1.value,f.t1.value);en=ilISO(d2,f.t2.value)}else{s=ilISO(f.d1.value,"00:00");const n=new Date(d2+"T12:00:00Z");n.setUTCDate(n.getUTCDate()+1);en=ilISO(n.toISOString().slice(0,10),"00:00")}
+ if(new Date(en)<=new Date(s)){msg("טווח לא תקין.","err");return}
+ const r=await sb.from("blocks").insert({start_ts:s,end_ts:en,reason:f.reason.value.trim()||null});r.error?msg(r.error.message,"err"):(msg("החסימה נוספה.","ok"),f.reset(),loadBlocks())};
+$("#f-svc").onsubmit=async e=>{e.preventDefault();const f=e.target;const id="s-"+Date.now().toString(36);const r=await sb.from("services").insert({id,name:f.name.value.trim(),duration_min:+f.dur.value,sort:99});r.error?msg(r.error.message,"err"):(f.reset(),loadServices())};
+$("#f-login").onsubmit=async e=>{e.preventDefault();const f=e.target;$("#m-login").textContent="מתחבר...";const {error}=await sb.auth.signInWithPassword({email:f.email.value.trim(),password:f.password.value});
+ if(error){$("#m-login").textContent="מייל או סיסמה שגויים.";$("#m-login").className="fmsg err"}else{f.reset();start()}};
+$("#b-out").onclick=async()=>{await sb.auth.signOut();show("login")};
+async function start(){const {data:{session}}=await sb.auth.getSession();if(!session){show("login");return}const {data:isA}=await sb.rpc("is_admin");if(!isA){await sb.auth.signOut();show("login");$("#m-login").textContent="למשתמש הזה אין הרשאת מנהל.";return}
+ $("#who").textContent=session.user.email;show("app");loadBookings()}
+start();});</script></body></html>

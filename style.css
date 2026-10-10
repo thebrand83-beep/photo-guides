@@ -121,3 +121,4 @@ footer p,footer a{color:var(--muted);font-size:.9rem;display:block;margin:0 0 .5
 .rform .btn{width:100%;justify-content:center;margin-top:.6rem}
 .fmsg{font-size:.85rem;color:var(--muted);margin:1rem 0 0;text-align:center}.fmsg.err{color:#d9a37a}.fmsg.ok{color:var(--gold)}
 @media(max-width:900px){.rgrid{grid-template-columns:1fr}.review,.rform{padding:1.8rem}}
+.ppmsg{margin-top:1.2rem;padding:1.3rem 1.5rem;border:1px solid var(--gold);background:rgba(194,164,109,.08);color:#d9d3c8;font-size:.92rem;animation:fade .5s ease}.ppmsg b{display:block;font-family:"Frank Ruhl Libre",serif;font-weight:400;font-size:1.2rem;color:var(--gold);margin-bottom:.3rem}.ppmsg a{color:var(--gold)}@keyframes fade{from{opacity:0;transform:translateY(6px)}}

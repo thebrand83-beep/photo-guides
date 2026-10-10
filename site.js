@@ -12,7 +12,9 @@ function mount(solid){document.body.insertAdjacentHTML("afterbegin",header(solid
  document.querySelectorAll(".rv").forEach(el=>io.observe(el));}
 function card(g){return `<a class="card rv" href="guide.html?id=${g.id}"><div class="ph"><img src="${g.image}" alt="${g.title}">${tag(g)}</div>
 <div class="meta"><h3>${g.title}</h3><span class="price">${nis(g.price)}</span></div><div class="lvl">${g.level||""}</div>${ratingLine(g.id)}<span class="more">לפרטי המדריך ←</span></a>`}
-function paypal(g){return "https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business="+encodeURIComponent(C.paypalEmail)+"&item_name="+encodeURIComponent(g.title)+"&item_number="+encodeURIComponent(g.id)+"&amount="+g.price+"&currency_code="+C.currency+"&no_shipping=1"}
+const ppReady=()=>/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(C.paypalEmail||"")&&!/YOUR_|example\.com/i.test(C.paypalEmail);
+function paypal(g){const base=location.href.split("?")[0].replace(/[^/]*$/,"");const q=new URLSearchParams({cmd:"_xclick",business:C.paypalEmail,item_name:g.title,item_number:g.id,amount:Number(g.price).toFixed(2),currency_code:C.currency||"ILS",no_shipping:"1",charset:"utf-8",lc:"he_IL","return":base+"thanks.html",cancel_return:base+"guide.html?id="+g.id});return "https://www.paypal.com/cgi-bin/webscr?"+q}
+function buyBtn(g){return ppReady()?`<a class="btn fill" href="${paypal(g)}" rel="noopener">לרכישה מאובטחת ב-PayPal</a>`:`<button class="btn fill" type="button" onclick="document.getElementById('ppmsg').hidden=false">לרכישה מאובטחת ב-PayPal</button><div class="ppmsg" id="ppmsg" hidden><b>מערכת התשלומים בהקמה</b>הרכישה באתר תיפתח בקרוב. בינתיים אפשר להזמין את המדריך במייל: <a href="mailto:${C.contactEmail}">${C.contactEmail}</a></div>`}
 const STAR='<svg viewBox="0 0 24 24"><path d="M12 2.6l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.4l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/></svg>';
 const stars=r=>`<span class="stars" aria-label="${r} מתוך 5">${[1,2,3,4,5].map(i=>`<i class="${i<=Math.round(r)?"on":""}">${STAR}</i>`).join("")}</span>`;
 const revsFor=id=>(C.reviews||[]).filter(r=>!id||r.guide===id);

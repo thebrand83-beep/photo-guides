@@ -32,7 +32,7 @@ content:
         type: string
         description: לדוגמה https://formspree.io/f/abcd1234. השאר ריק עד שתגדיר.
       - name: bookingUrl
-        label: קישור להזמנת צילום
+        label: קישור להזמנת צילום (ברירת מחדל: booking.html)
         type: string
       - name: currency
         label: מטבע

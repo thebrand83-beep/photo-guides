@@ -2,7 +2,7 @@
   "paypalEmail": "studioimage1983@gmail.com",
   "contactEmail": "studioimage1983@gmail.com",
   "reviewsEndpoint": "",
-  "bookingUrl": "https://studioimagebooking.base44.app",
+  "bookingUrl": "booking.html",
   "currency": "ILS",
   "area": "חיפה והקריות",
   "hero": {

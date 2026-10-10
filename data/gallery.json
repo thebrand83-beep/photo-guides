@@ -7,7 +7,8 @@
     "example": true,
     "credit": "Unsplash photo-1438761681033-6461ffad8d80",
     "w": 1400,
-    "h": 933
+    "h": 933,
+    "thumb": "img/gallery/example-01-thumb.webp"
   },
   {
     "image": "img/gallery/example-02.webp",
@@ -17,7 +18,8 @@
     "example": true,
     "credit": "Unsplash photo-1519741497674-611481863552",
     "w": 1400,
-    "h": 933
+    "h": 933,
+    "thumb": "img/gallery/example-02-thumb.webp"
   },
   {
     "image": "img/gallery/example-03.webp",
@@ -27,7 +29,8 @@
     "example": true,
     "credit": "Unsplash photo-1441974231531-c6227db76b6e",
     "w": 1400,
-    "h": 932
+    "h": 932,
+    "thumb": "img/gallery/example-03-thumb.webp"
   },
   {
     "image": "img/gallery/example-04.webp",
@@ -37,7 +40,8 @@
     "example": true,
     "credit": "Unsplash photo-1494790108377-be9c29b29330",
     "w": 933,
-    "h": 1400
+    "h": 1400,
+    "thumb": "img/gallery/example-04-thumb.webp"
   },
   {
     "image": "img/gallery/example-05.webp",
@@ -47,7 +51,8 @@
     "example": true,
     "credit": "Unsplash photo-1465495976277-4387d4b0b4c6",
     "w": 1400,
-    "h": 933
+    "h": 933,
+    "thumb": "img/gallery/example-05-thumb.webp"
   },
   {
     "image": "img/gallery/example-06.webp",
@@ -57,7 +62,8 @@
     "example": true,
     "credit": "Unsplash photo-1506905925346-21bda4d32df4",
     "w": 1400,
-    "h": 933
+    "h": 933,
+    "thumb": "img/gallery/example-06-thumb.webp"
   },
   {
     "image": "img/gallery/example-07.webp",
@@ -67,7 +73,8 @@
     "example": true,
     "credit": "Unsplash photo-1507003211169-0a1dd7228f2d",
     "w": 933,
-    "h": 1400
+    "h": 1400,
+    "thumb": "img/gallery/example-07-thumb.webp"
   },
   {
     "image": "img/gallery/example-08.webp",
@@ -77,7 +84,8 @@
     "example": true,
     "credit": "Unsplash photo-1511285560929-80b456fea0bc",
     "w": 1400,
-    "h": 935
+    "h": 935,
+    "thumb": "img/gallery/example-08-thumb.webp"
   },
   {
     "image": "img/gallery/example-09.webp",
@@ -87,7 +95,8 @@
     "example": true,
     "credit": "Unsplash photo-1469474968028-56623f02e42e",
     "w": 1400,
-    "h": 930
+    "h": 930,
+    "thumb": "img/gallery/example-09-thumb.webp"
   },
   {
     "image": "img/gallery/example-10.webp",
@@ -97,7 +106,8 @@
     "example": true,
     "credit": "Unsplash photo-1529626455594-4ff0802cfb7e",
     "w": 933,
-    "h": 1400
+    "h": 1400,
+    "thumb": "img/gallery/example-10-thumb.webp"
   },
   {
     "image": "img/gallery/example-11.webp",
@@ -107,7 +117,8 @@
     "example": true,
     "credit": "Unsplash photo-1519225421980-715cb0215aed",
     "w": 1400,
-    "h": 933
+    "h": 933,
+    "thumb": "img/gallery/example-11-thumb.webp"
   },
   {
     "image": "img/gallery/example-12.webp",
@@ -117,6 +128,7 @@
     "example": true,
     "credit": "Unsplash photo-1500530855697-b586d89ba3ee",
     "w": 933,
-    "h": 1400
+    "h": 1400,
+    "thumb": "img/gallery/example-12-thumb.webp"
   }
 ]

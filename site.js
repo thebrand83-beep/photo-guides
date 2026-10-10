@@ -1,10 +1,10 @@
 let C={};
 const esc=t=>String(t??"").replace(/[&<>"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"})[m]);
 const src=p=>String(p||"").replace(/^\/+/,"");
-async function boot(fn){const v="?v="+Date.now();const get=f=>fetch("data/"+f+v).then(r=>r.json());
+async function boot(fn,opt){opt=opt||{};const v="?v="+Date.now();const get=f=>fetch("data/"+f+v).then(r=>r.json());
  const [site,guides,local]=await Promise.all([get("site.json"),get("guides.json"),get("reviews.json").catch(()=>[])]);
  let reviews=local||[];
- if(site.supabaseUrl&&site.supabaseAnonKey){try{const r=await fetch(site.supabaseUrl+"/rest/v1/reviews?select=name,guide,rating,text,created_at&status=eq.approved&order=created_at.desc&limit=200",{headers:{apikey:site.supabaseAnonKey,Authorization:"Bearer "+site.supabaseAnonKey}});if(r.ok)reviews=reviews.concat(await r.json())}catch(e){}}
+ if(opt.reviews!==false&&site.supabaseUrl&&site.supabaseAnonKey){try{const r=await fetch(site.supabaseUrl+"/rest/v1/reviews?select=name,guide,rating,text,created_at&status=eq.approved&order=created_at.desc&limit=200",{headers:{apikey:site.supabaseAnonKey,Authorization:"Bearer "+site.supabaseAnonKey}});if(r.ok)reviews=reviews.concat(await r.json())}catch(e){}}
  C=Object.assign({},site,{guides:(guides||[]).map(g=>Object.assign({},g,{image:src(g.image),topics:g.topics||[]})),reviews:(reviews||[]).filter(r=>r&&r.text)});
  document.querySelectorAll("[data-t]").forEach(el=>{const v=el.dataset.t.split(".").reduce((o,k)=>o&&o[k],C);if(v!=null)el.textContent=v});
  document.querySelectorAll("[data-h]").forEach(el=>{const v=el.dataset.h.split(".").reduce((o,k)=>o&&o[k],C);if(v!=null)el.innerHTML=v});

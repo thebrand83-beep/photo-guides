@@ -227,6 +227,10 @@ content:
         label: להציג תגית "דוגמה"
         type: boolean
         description: כבה (או מחק את התמונה) כשזו תמונה שלך
+      - name: thumb
+        label: תמונה מוקטנת
+        type: string
+        hidden: true
       - name: credit
         label: קרדיט
         type: string

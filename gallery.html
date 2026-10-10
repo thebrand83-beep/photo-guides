@@ -4,18 +4,18 @@
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="מדריכי צילום אונליין | Studio Image Photography"><meta name="twitter:description" content="מדריכי צילום מעשיים מצלם דור שני עם למעלה מעשור של ניסיון. לומדים בקצב שלכם, מכל מקום. Studio Image Photography, חיפה והקריות."><meta name="twitter:image" content="https://thebrand83-beep.github.io/photo-guides/img/og.jpg"><link rel="stylesheet" href="style.css">
 <script src="site.js"></script></head><body>
 <main class="gal"><div class="wrap"><div class="head rv in"><div><div class="eyebrow">פורטפוליו</div><h2 style="font-size:clamp(2.4rem,5vw,4rem)">גלריה</h2></div><p>רגעים, אור ואנשים. מבחר עבודות מהסטודיו ומהשטח.</p></div>
-<div class="filters" id="flt" role="tablist"></div><div class="masonry" id="grid"></div></div></main>
+<div class="filters" id="flt"></div><div class="masonry" id="grid"></div></div></main>
 <div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="תצוגת תמונה">
 <button class="lbx" id="lbx" aria-label="סגירה">✕</button><button class="lbn lbprev" id="lbp" aria-label="התמונה הקודמת">›</button><button class="lbn lbnext" id="lbn" aria-label="התמונה הבאה">‹</button>
 <figure><img id="lbi" alt=""><figcaption><b id="lbt"></b><span id="lbc"></span><small id="lbk"></small></figcaption></figure></div>
-<script>const CATS={portraits:"פורטרטים",weddings:"חתונות ואירועים",family:"משפחה",landscape:"נוף",products:"מוצרים",other:"אחר"};
+<script>const GAL=fetch("data/gallery.json?v="+Date.now()).then(r=>r.json()).catch(()=>[]);const CATS={portraits:"פורטרטים",weddings:"חתונות ואירועים",family:"משפחה",landscape:"נוף",products:"מוצרים",other:"אחר"};
 boot(async()=>{mount(true);
-let items=[];try{items=await fetch("data/gallery.json?v="+Date.now()).then(r=>r.json())}catch(e){}
-items=(items||[]).filter(x=>x&&x.image).map(x=>Object.assign({},x,{image:src(x.image)}));
+let items=await GAL;
+items=(items||[]).filter(x=>x&&x.image).map(x=>Object.assign({},x,{image:src(x.image),thumb:src(x.thumb&&src(x.thumb).startsWith(src(x.image).replace(/\.[^.]+$/,""))?x.thumb:x.image)}));
 let cur="all",view=items,idx=0;const cats=[...new Set(items.map(x=>x.category).filter(Boolean))];
 $("#flt").innerHTML=cats.length>1?[["all","הכל"],...cats.map(c=>[c,CATS[c]||c])].map(([k,l])=>`<button class="fbtn${k==="all"?" on":""}" data-c="${esc(k)}">${esc(l)}</button>`).join(""):"";
 function render(){view=cur==="all"?items:items.filter(x=>x.category===cur);
- $("#grid").innerHTML=view.length?view.map((x,i)=>`<button class="gi" data-i="${i}" aria-label="${esc(x.title||x.alt||"תמונה")}"><img src="${esc(x.image)}" alt="${esc(x.alt||x.title||"")}" loading="${i<4?"eager":"lazy"}" decoding="async"${x.w?` width="${x.w}" height="${x.h}"`:""}>${x.example?'<span class="tag">דוגמה</span>':""}${x.title?`<span class="gcap">${esc(x.title)}</span>`:""}</button>`).join(""):'<div class="aempty">התמונות יעלו בקרוב.</div>';}
+ $("#grid").innerHTML=view.length?view.map((x,i)=>`<button class="gi" data-i="${i}"><img src="${esc(x.thumb)}" alt="${esc(x.alt||x.title||"")}" loading="${i<3?"eager":"lazy"}"${i===0?' fetchpriority="high"':""} decoding="async"${x.w?` width="${x.w}" height="${x.h}"`:""}>${x.example?'<span class="tag">דוגמה</span>':""}${x.title?`<span class="gcap">${esc(x.title)}</span>`:""}</button>`).join(""):'<div class="aempty">התמונות יעלו בקרוב.</div>';}
 $("#flt").onclick=e=>{const b=e.target.closest(".fbtn");if(!b)return;cur=b.dataset.c;document.querySelectorAll(".fbtn").forEach(x=>x.classList.toggle("on",x===b));render()};
 const lb=$("#lb"),img=$("#lbi");let last=null;
 function open(i){idx=(i+view.length)%view.length;const x=view[idx];img.classList.remove("show");img.src=x.image;img.alt=x.alt||x.title||"";
@@ -30,4 +30,4 @@ document.addEventListener("keydown",e=>{if(lb.hidden)return;if(e.key==="Escape")
  if(e.key==="Tab"){const f=[...lb.querySelectorAll("button")];const i=f.indexOf(document.activeElement);e.preventDefault();f[(i+(e.shiftKey?-1:1)+f.length)%f.length].focus()}});
 let sx=0,sy=0;lb.addEventListener("touchstart",e=>{sx=e.touches[0].clientX;sy=e.touches[0].clientY},{passive:true});
 lb.addEventListener("touchend",e=>{const dx=e.changedTouches[0].clientX-sx,dy=e.changedTouches[0].clientY-sy;if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy))open(idx+(dx>0?1:-1));else if(dy>90)close()});
-render();});</script></body></html>
+render();},{reviews:false});</script></body></html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html><html lang="he" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ניהול ביקורות · Studio Image Photography</title><meta name="robots" content="noindex"><meta name="description" content="מדריכי צילום מעשיים מצלם דור שני עם למעלה מעשור של ניסיון. לומדים בקצב שלכם, מכל מקום. Studio Image Photography, חיפה והקריות."><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500&family=Heebo:wght@300;400;500&display=swap"><link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500&family=Heebo:wght@300;400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'"><noscript><link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500&family=Heebo:wght@300;400;500&display=swap" rel="stylesheet"></noscript><meta name="theme-color" content="#0e0d0c"><link rel="icon" type="image/png" href="favicon.png"><link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta property="og:type" content="website"><meta property="og:locale" content="he_IL"><meta property="og:site_name" content="Studio Image Photography"><meta property="og:title" content="מדריכי צילום אונליין | Studio Image Photography"><meta property="og:description" content="מדריכי צילום מעשיים מצלם דור שני עם למעלה מעשור של ניסיון. לומדים בקצב שלכם, מכל מקום. Studio Image Photography, חיפה והקריות."><meta property="og:url" content="https://thebrand83-beep.github.io/photo-guides/admin.html"><meta property="og:image" content="https://thebrand83-beep.github.io/photo-guides/img/og.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="מצלמה וינטג׳ ותמונות על מפה">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="מדריכי צילום אונליין | Studio Image Photography"><meta name="twitter:description" content="מדריכי צילום מעשיים מצלם דור שני עם למעלה מעשור של ניסיון. לומדים בקצב שלכם, מכל מקום. Studio Image Photography, חיפה והקריות."><meta name="twitter:image" content="https://thebrand83-beep.github.io/photo-guides/img/og.jpg"><link rel="stylesheet" href="style.css">
+<script src="site.js"></script></head><body>
+<main class="page adm"><div class="eyebrow">אזור ניהול</div><h1>ניהול ביקורות</h1>
+<div id="v-login" class="apanel" hidden><p>התחברות עם המייל והסיסמה של המנהל.</p>
+<form id="f-login" class="rform" novalidate><label>מייל<input name="email" type="email" autocomplete="username" required></label><label>סיסמה<input name="password" type="password" autocomplete="current-password" required></label>
+<button class="btn fill" type="submit">התחברות</button><p class="fmsg" id="m-login"></p><button type="button" class="linkbtn" id="b-forgot">שכחתי סיסמה / קביעת סיסמה ראשונה</button></form></div>
+<div id="v-reset" class="apanel" hidden><p>בחרו סיסמה חדשה (לפחות 10 תווים).</p>
+<form id="f-reset" class="rform" novalidate><label>סיסמה חדשה<input name="p1" type="password" autocomplete="new-password" minlength="10" required></label><label>אימות סיסמה<input name="p2" type="password" autocomplete="new-password" minlength="10" required></label>
+<button class="btn fill" type="submit">שמירת סיסמה</button><p class="fmsg" id="m-reset"></p></form></div>
+<div id="v-app" hidden><div class="abar"><span id="who"></span><button class="linkbtn" id="b-out" type="button">התנתקות</button></div>
+<div class="h4">ממתינות לאישור <span id="c-p" class="cnt"></span></div><div id="l-p" class="alist"></div>
+<div class="h4" style="margin-top:4rem">מפורסמות באתר <span id="c-a" class="cnt"></span></div><div id="l-a" class="alist"></div></div>
+<p class="fmsg" id="m-app"></p></main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script>boot(()=>{mount(true);
+const sb=supabase.createClient(C.supabaseUrl,C.supabaseAnonKey,{auth:{persistSession:true,detectSessionInUrl:true,flowType:"implicit"}});
+const show=v=>["login","reset","app"].forEach(x=>$("#v-"+x).hidden=x!==v);
+const msg=(id,t,cls)=>{const e=$(id);e.textContent=t;e.className="fmsg"+(cls?" "+cls:"")};
+const gt=id=>{const g=C.guides.find(x=>x.id===id);return g?g.title:id};
+const fmt=d=>new Date(d).toLocaleString("he-IL",{dateStyle:"medium",timeStyle:"short"});
+let recovering=/type=recovery/.test(location.hash);
+async function load(){const {data:isA}=await sb.rpc("is_admin");if(!isA){msg("#m-app","למשתמש הזה אין הרשאת מנהל.","err");await sb.auth.signOut();show("login");return}
+ const {data,error}=await sb.from("reviews").select("*").order("created_at",{ascending:false});if(error){msg("#m-app","שגיאה בטעינה: "+error.message,"err");return}
+ const p=data.filter(r=>r.status==="pending"),a=data.filter(r=>r.status==="approved");
+ $("#c-p").textContent=p.length;$("#c-a").textContent=a.length;
+ const item=(r,pend)=>`<article class="aitem" data-id="${r.id}"><div class="ahead">${stars(r.rating)}<b>${esc(r.name)}</b><span>${esc(gt(r.guide))}</span><time>${fmt(r.created_at)}</time></div><p>${esc(r.text)}</p>
+  <div class="ameta">דירוג ${r.rating}/5 · מזהה מדריך: ${esc(r.guide)}${r.page?` · נשלח מ: ${esc(r.page)}`:""}${r.approved_at?` · אושר: ${fmt(r.approved_at)}`:""}</div>
+  <div class="aact">${pend?'<button class="btn fill" data-act="approve">אישור ופרסום</button>':'<button class="btn" data-act="unpublish">הסרה מהאתר</button>'}<button class="btn danger" data-act="delete">מחיקה</button></div></article>`;
+ $("#l-p").innerHTML=p.length?p.map(r=>item(r,true)).join(""):'<div class="aempty">אין ביקורות שממתינות לאישור.</div>';
+ $("#l-a").innerHTML=a.length?a.map(r=>item(r,false)).join(""):'<div class="aempty">עדיין לא פורסמו ביקורות.</div>';}
+document.addEventListener("click",async e=>{const b=e.target.closest("[data-act]");if(!b)return;const id=b.closest(".aitem").dataset.id,act=b.dataset.act;
+ if(act==="delete"&&!confirm("למחוק את הביקורת לצמיתות?"))return;b.disabled=true;let r;
+ if(act==="approve")r=await sb.from("reviews").update({status:"approved",approved_at:new Date().toISOString()}).eq("id",id);
+ if(act==="unpublish")r=await sb.from("reviews").update({status:"pending",approved_at:null}).eq("id",id);
+ if(act==="delete")r=await sb.from("reviews").delete().eq("id",id);
+ if(r.error){msg("#m-app","הפעולה נכשלה: "+r.error.message,"err");b.disabled=false}else{msg("#m-app",act==="approve"?"הביקורת אושרה ומופיעה באתר.":act==="delete"?"הביקורת נמחקה.":"הביקורת הוסרה מהאתר.","ok");load()}});
+$("#f-login").onsubmit=async e=>{e.preventDefault();const f=e.target;msg("#m-login","מתחבר...");
+ const {error}=await sb.auth.signInWithPassword({email:f.email.value.trim(),password:f.password.value});if(error)msg("#m-login","מייל או סיסמה שגויים.","err");else{f.reset();start()}};
+$("#b-forgot").onclick=async()=>{const em=$("#f-login").email.value.trim();if(!em){msg("#m-login","הזינו קודם את המייל בשדה למעלה.","err");return}
+ const {error}=await sb.auth.resetPasswordForEmail(em,{redirectTo:location.origin+location.pathname});msg("#m-login",error?"השליחה נכשלה, נסו שוב בעוד דקה.":"אם המייל רשום כמנהל, נשלח אליו קישור לקביעת סיסמה.",error?"err":"ok")};
+$("#f-reset").onsubmit=async e=>{e.preventDefault();const f=e.target;if(f.p1.value.length<10||f.p1.value!==f.p2.value){msg("#m-reset","הסיסמאות לא תואמות או קצרות מ-10 תווים.","err");return}
+ const {error}=await sb.auth.updateUser({password:f.p1.value});if(error){msg("#m-reset","השמירה נכשלה: "+error.message,"err");return}recovering=false;history.replaceState(null,"",location.pathname);f.reset();start()};
+$("#b-out").onclick=async()=>{await sb.auth.signOut();show("login")};
+sb.auth.onAuthStateChange(ev=>{if(ev==="PASSWORD_RECOVERY"){recovering=true;show("reset")}});
+async function start(){const {data:{session}}=await sb.auth.getSession();if(recovering&&session){show("reset");return}
+ if(!session){show("login");return}$("#who").textContent=session.user.email;show("app");load()}
+start();});</script></body></html>

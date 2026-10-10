@@ -2,7 +2,9 @@ let C={};
 const esc=t=>String(t??"").replace(/[&<>"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"})[m]);
 const src=p=>String(p||"").replace(/^\/+/,"");
 async function boot(fn){const v="?v="+Date.now();const get=f=>fetch("data/"+f+v).then(r=>r.json());
- const [site,guides,reviews]=await Promise.all([get("site.json"),get("guides.json"),get("reviews.json").catch(()=>[])]);
+ const [site,guides,local]=await Promise.all([get("site.json"),get("guides.json"),get("reviews.json").catch(()=>[])]);
+ let reviews=local||[];
+ if(site.supabaseUrl&&site.supabaseAnonKey){try{const r=await fetch(site.supabaseUrl+"/rest/v1/reviews?select=name,guide,rating,text,created_at&status=eq.approved&order=created_at.desc&limit=200",{headers:{apikey:site.supabaseAnonKey,Authorization:"Bearer "+site.supabaseAnonKey}});if(r.ok)reviews=reviews.concat(await r.json())}catch(e){}}
  C=Object.assign({},site,{guides:(guides||[]).map(g=>Object.assign({},g,{image:src(g.image),topics:g.topics||[]})),reviews:(reviews||[]).filter(r=>r&&r.text)});
  document.querySelectorAll("[data-t]").forEach(el=>{const v=el.dataset.t.split(".").reduce((o,k)=>o&&o[k],C);if(v!=null)el.textContent=v});
  document.querySelectorAll("[data-h]").forEach(el=>{const v=el.dataset.h.split(".").reduce((o,k)=>o&&o[k],C);if(v!=null)el.innerHTML=v});
@@ -44,13 +46,15 @@ const paint=v=>btns.forEach(b=>b.classList.toggle("on",+b.dataset.v<=v));
 btns.forEach(b=>{b.onmouseenter=()=>paint(+b.dataset.v);b.onclick=()=>{h.value=b.dataset.v;paint(+h.value)}});f.querySelector(".starpick").onmouseleave=()=>paint(+h.value||0);
 f.onsubmit=async e=>{e.preventDefault();m.className="fmsg";
  if(!f.name.value.trim()||!f.guide.value||!h.value||!f.text.value.trim()){m.textContent="נא למלא שם, מדריך, דירוג וטקסט.";m.classList.add("err");return}
- if(!C.reviewsEndpoint){m.textContent="מערכת הביקורות עדיין בהקמה. בינתיים אפשר לשלוח את הביקורת במייל: "+C.contactEmail;m.classList.add("err");return}
  if(f._honey.value)return;
  const btn=f.querySelector("[type=submit]");btn.disabled=true;m.textContent="שולח...";
  try{const g=C.guides.find(x=>x.id===f.guide.value);
-  const payload={name:f.name.value.trim(),guide:f.guide.value,guide_title:g?g.title:"",rating:h.value,text:f.text.value.trim(),page:location.href,_subject:"ביקורת חדשה באתר",_template:"table",_captcha:"false",_honey:""};
-  const r=await fetch(C.reviewsEndpoint,{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify(payload)});
-  const j=await r.json().catch(()=>({}));if(!r.ok||String(j.success)==="false")throw new Error(j.message||r.status);
+  const payload={name:f.name.value.trim(),guide:f.guide.value,guide_title:g?g.title:null,rating:+h.value,text:f.text.value.trim(),page:location.href.slice(0,300)};
+  let r;
+  if(C.supabaseUrl&&C.supabaseAnonKey){r=await fetch(C.supabaseUrl+"/rest/v1/reviews",{method:"POST",headers:{apikey:C.supabaseAnonKey,Authorization:"Bearer "+C.supabaseAnonKey,"Content-Type":"application/json",Prefer:"return=minimal"},body:JSON.stringify(payload)})}
+  else if(C.reviewsEndpoint){r=await fetch(C.reviewsEndpoint,{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify(Object.assign(payload,{_subject:"ביקורת חדשה באתר",_template:"table",_captcha:"false"}))})}
+  else throw new Error("no endpoint");
+  if(!r.ok)throw new Error(r.status);
   f.reset();h.value="";paint(0);m.textContent="תודה! הביקורת התקבלה ותפורסם לאחר אישור.";m.classList.add("ok")}
  catch(e){m.textContent="השליחה נכשלה. נסו שוב או כתבו לנו: "+C.contactEmail;m.classList.add("err")}
  finally{btn.disabled=false}}}

@@ -148,3 +148,14 @@ footer .fh{font-size:.85rem;letter-spacing:.04em;color:var(--gold);margin:0 0 1.
 @media(max-width:600px){footer a,footer p{padding:.65rem 0}.brand{padding:.2rem 0;min-height:46px}.brand small{font-size:.7rem;letter-spacing:.18em}}
 @media(max-width:600px){.brand small{font-size:.75rem;letter-spacing:.14em}}
 @media(max-width:600px){.buy ol a{display:inline;padding:0}.buy ol li{padding:.5rem 0}}
+/* reviews admin */
+.adm{max-width:900px}.apanel{max-width:460px}.adm .rform{margin-top:1.5rem}
+.linkbtn{background:none;border:0;color:var(--muted);font:inherit;font-size:.88rem;cursor:pointer;padding:.8rem 0;text-decoration:underline;text-underline-offset:4px;display:block;margin:0 auto}.linkbtn:hover{color:var(--gold)}
+.abar{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding-bottom:.5rem;color:var(--muted)}.abar .linkbtn{margin:0}
+.cnt{display:inline-block;min-width:1.6rem;text-align:center;border:1px solid var(--line);color:var(--paper);margin-inline-start:.5rem;padding:0 .4rem}
+.alist{display:grid;gap:1.2rem;margin-top:1.2rem}.aitem{border:1px solid var(--line);background:var(--ink2);padding:1.6rem}
+.ahead{display:flex;flex-wrap:wrap;gap:.4rem 1rem;align-items:center}.ahead b{font-weight:400;font-size:1.1rem}.ahead span{color:var(--gold);font-size:.9rem}.ahead time{color:var(--muted);font-size:.82rem;margin-inline-start:auto}
+.aitem p{margin:1rem 0;font-family:"Frank Ruhl Libre",serif;font-size:1.15rem;white-space:pre-wrap;color:var(--paper)}
+.ameta{font-size:.8rem;color:var(--muted);word-break:break-all}.aact{display:flex;gap:.8rem;flex-wrap:wrap;margin-top:1.2rem}.aact .btn{padding:.7rem 1.4rem}
+.btn.danger{border-color:#8a4b3a;color:#e0a48f}.btn.danger:hover{background:#8a4b3a;color:var(--paper)}
+.aempty{padding:2rem;border:1px dashed var(--line);color:var(--muted);text-align:center}

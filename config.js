@@ -1,6 +1,6 @@
 // ===== קובץ הגדרות — ערוך כאן בלבד =====
 window.SITE_CONFIG = {
-  paypalEmail: "YOUR_PAYPAL_EMAIL@example.com", // ← החלף בכתובת חשבון ה-PayPal שלך
+  paypalEmail: "studioimage1983@gmail.com", // ← החלף בכתובת חשבון ה-PayPal שלך
   currency: "ILS",
   contactEmail: "YOUR_EMAIL@example.com",       // ← החלף במייל ליצירת קשר
   // כתובת טופס לקבלת ביקורות (למשל Formspree: https://formspree.io/f/XXXX). השאר ריק עד שתגדיר.

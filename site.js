@@ -38,13 +38,19 @@ return `<section class="block reviews" id="reviews"><div class="wrap"><div class
 <label>מדריך<select name="guide" required>${id?"":'<option value="" disabled selected>בחרו מדריך</option>'}${opts}</select></label>
 <div class="lbl">דירוג<div class="starpick" role="radiogroup">${[1,2,3,4,5].map(i=>`<button type="button" data-v="${i}" aria-label="${i} כוכבים">${STAR}</button>`).join("")}</div><input type="hidden" name="rating"></div>
 <label>הביקורת שלכם<textarea name="text" required rows="4" maxlength="800" placeholder="מה למדתם? מה אהבתם?"></textarea></label>
-<button class="btn fill" type="submit">שליחת ביקורת</button><p class="fmsg" id="fmsg">ביקורות מתפרסמות לאחר אישור.</p></form></div></div></section>`}
+<input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);opacity:0;pointer-events:none"><button class="btn fill" type="submit">שליחת ביקורת</button><p class="fmsg" id="fmsg">ביקורות מתפרסמות לאחר אישור.</p></form></div></div></section>`}
 function initForm(){const f=document.getElementById("rform");if(!f)return;const btns=[...f.querySelectorAll(".starpick button")],h=f.rating,m=document.getElementById("fmsg");
 const paint=v=>btns.forEach(b=>b.classList.toggle("on",+b.dataset.v<=v));
 btns.forEach(b=>{b.onmouseenter=()=>paint(+b.dataset.v);b.onclick=()=>{h.value=b.dataset.v;paint(+h.value)}});f.querySelector(".starpick").onmouseleave=()=>paint(+h.value||0);
 f.onsubmit=async e=>{e.preventDefault();m.className="fmsg";
  if(!f.name.value.trim()||!f.guide.value||!h.value||!f.text.value.trim()){m.textContent="נא למלא שם, מדריך, דירוג וטקסט.";m.classList.add("err");return}
  if(!C.reviewsEndpoint){m.textContent="מערכת הביקורות עדיין בהקמה. בינתיים אפשר לשלוח את הביקורת במייל: "+C.contactEmail;m.classList.add("err");return}
- try{const r=await fetch(C.reviewsEndpoint,{method:"POST",headers:{Accept:"application/json"},body:new FormData(f)});if(!r.ok)throw 0;
+ if(f._honey.value)return;
+ const btn=f.querySelector("[type=submit]");btn.disabled=true;m.textContent="שולח...";
+ try{const g=C.guides.find(x=>x.id===f.guide.value);
+  const payload={name:f.name.value.trim(),guide:f.guide.value,guide_title:g?g.title:"",rating:h.value,text:f.text.value.trim(),page:location.href,_subject:"ביקורת חדשה באתר",_template:"table",_captcha:"false",_honey:""};
+  const r=await fetch(C.reviewsEndpoint,{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify(payload)});
+  const j=await r.json().catch(()=>({}));if(!r.ok||String(j.success)==="false")throw new Error(j.message||r.status);
   f.reset();h.value="";paint(0);m.textContent="תודה! הביקורת התקבלה ותפורסם לאחר אישור.";m.classList.add("ok")}
- catch{m.textContent="השליחה נכשלה. נסו שוב או כתבו לנו: "+C.contactEmail;m.classList.add("err")}}}
+ catch(e){m.textContent="השליחה נכשלה. נסו שוב או כתבו לנו: "+C.contactEmail;m.classList.add("err")}
+ finally{btn.disabled=false}}}

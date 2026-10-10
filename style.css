@@ -159,3 +159,4 @@ footer .fh{font-size:.85rem;letter-spacing:.04em;color:var(--gold);margin:0 0 1.
 .ameta{font-size:.8rem;color:var(--muted);word-break:break-all}.aact{display:flex;gap:.8rem;flex-wrap:wrap;margin-top:1.2rem}.aact .btn{padding:.7rem 1.4rem}
 .btn.danger{border-color:#8a4b3a;color:#e0a48f}.btn.danger:hover{background:#8a4b3a;color:var(--paper)}
 .aempty{padding:2rem;border:1px dashed var(--line);color:var(--muted);text-align:center}
+.cmslink{margin:0 0 2.5rem;padding:.7rem 1.4rem;font-size:.88rem}

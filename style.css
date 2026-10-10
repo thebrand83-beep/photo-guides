@@ -1,9 +1,98 @@
-*{box-sizing:border-box}body{margin:0;font-family:"Heebo",Arial,sans-serif;background:#faf8f5;color:#222;line-height:1.7}
-a{color:inherit}header{background:#111;color:#fff;padding:1rem 5%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap}
-header nav a{margin-inline-start:1.2rem;text-decoration:none;opacity:.85}header .logo{font-weight:700;font-size:1.3rem;text-decoration:none}
-.hero{background:linear-gradient(135deg,#1c1c1c,#3a2f25);color:#fff;text-align:center;padding:5rem 5%}.hero h1{font-size:2.4rem;margin:0 0 .5rem}
-main{max-width:1100px;margin:auto;padding:2.5rem 5%}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem}
-.card{background:#fff;border-radius:14px;box-shadow:0 4px 18px #0001;padding:1.6rem;display:flex;flex-direction:column}.card h3{margin-top:0}
-.price{font-size:1.4rem;font-weight:700;color:#a0672b}.btn{display:inline-block;background:#a0672b;color:#fff;padding:.7rem 1.4rem;border-radius:8px;text-decoration:none;border:0;font-size:1rem;cursor:pointer;margin-top:auto;text-align:center}
-.btn.paypal{background:#0070ba}.note{background:#fff7e6;border-inline-start:4px solid #a0672b;padding:1rem;border-radius:6px;margin-top:1.5rem}
-.badge{background:#ffe08a;color:#5a4300;font-size:.8rem;padding:.15rem .6rem;border-radius:20px}footer{text-align:center;padding:2rem;color:#777;font-size:.9rem}
+:root{--ink:#0e0d0c;--ink2:#171513;--paper:#f5f1ea;--muted:#8d877e;--gold:#c2a46d;--line:rgba(194,164,109,.28)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--ink);color:var(--paper);font-family:"Heebo",sans-serif;font-weight:300;line-height:1.8;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}img{display:block;max-width:100%}
+h1,h2,h3{font-family:"Frank Ruhl Libre",serif;font-weight:400;line-height:1.2;margin:0}
+.eyebrow{font-size:.85rem;letter-spacing:.04em;color:var(--gold);font-weight:400}
+.wrap{max-width:1240px;margin:auto;padding:0 6vw}
+/* header */
+.nav{position:absolute;top:0;inset-inline:0;z-index:10;display:flex;justify-content:space-between;align-items:center;padding:2rem 6vw}
+.nav.solid{position:relative;border-bottom:1px solid var(--line)}
+.brand{font-family:"Frank Ruhl Libre",serif;font-size:1.15rem;letter-spacing:.18em;text-transform:uppercase}
+.brand small{display:block;font-family:"Heebo";font-size:.6rem;letter-spacing:.45em;color:var(--gold)}
+.nav nav a{margin-inline-start:2.4rem;font-size:.95rem;letter-spacing:.02em;opacity:.8;transition:opacity .3s,color .3s}
+.nav nav a:hover{opacity:1;color:var(--gold)}
+/* hero */
+.hero{position:relative;height:100vh;min-height:640px;display:flex;align-items:flex-end;overflow:hidden}
+.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.42) saturate(.75);transform:scale(1.06);animation:zoom 14s ease-out forwards}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,var(--ink) 0%,transparent 55%)}
+.hero .wrap{position:relative;z-index:2;padding-bottom:11vh;width:100%}
+.hero h1{font-size:clamp(2.8rem,6.5vw,5.8rem);max-width:12ch;margin:1.2rem 0 1.5rem}
+.hero p{max-width:34rem;color:#d9d3c8;font-size:1.1rem}
+@keyframes zoom{to{transform:scale(1)}}
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:.8rem;padding:1rem 2.2rem;border:1px solid var(--gold);color:var(--paper);font-size:.95rem;letter-spacing:.03em;transition:background .4s,color .4s;cursor:pointer;background:none;font-family:inherit}
+.btn:hover{background:var(--gold);color:var(--ink)}
+.btn.fill{background:var(--gold);color:var(--ink);font-weight:500}.btn.fill:hover{background:var(--paper)}
+.btn-row{display:flex;gap:1rem;flex-wrap:wrap;margin-top:2.4rem}
+/* sections */
+section.block{padding:9rem 0}
+.head{display:flex;justify-content:space-between;align-items:flex-end;gap:2rem;margin-bottom:4rem;padding-bottom:2rem;border-bottom:1px solid var(--line)}
+.head h2{font-size:clamp(2rem,4vw,3.2rem);margin-top:.8rem}
+.head p{max-width:26rem;color:var(--muted);margin:0}
+/* cards */
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2.5rem}
+.card{display:block;group:1}
+.card .ph{position:relative;aspect-ratio:4/5;overflow:hidden;background:var(--ink2)}
+.card .ph img{width:100%;height:100%;object-fit:cover;filter:saturate(.8);transition:transform 1.2s cubic-bezier(.2,.7,.2,1),filter .6s}
+.card:hover .ph img{transform:scale(1.05);filter:saturate(1)}
+.tag{position:absolute;top:1rem;inset-inline-start:1rem;font-size:.72rem;letter-spacing:.05em;padding:.3rem .7rem;background:rgba(14,13,12,.7);border:1px solid var(--line);color:var(--gold);backdrop-filter:blur(6px)}
+.card .meta{display:flex;justify-content:space-between;align-items:baseline;margin-top:1.6rem}
+.card h3{font-size:1.6rem}
+.card .price{font-family:"Frank Ruhl Libre",serif;color:var(--gold);font-size:1.3rem;white-space:nowrap}
+.card .lvl{font-size:.85rem;letter-spacing:.02em;color:var(--muted);margin-top:.4rem}
+.card .more{display:inline-block;margin-top:1.2rem;font-size:.9rem;letter-spacing:.02em;border-bottom:1px solid var(--line);padding-bottom:.3rem;transition:border-color .3s,color .3s}
+.card:hover .more{color:var(--gold);border-color:var(--gold)}
+/* trust */
+.trust{background:var(--paper);color:var(--ink)}
+.trust .head{border-color:rgba(14,13,12,.15)}.trust .head p{color:#6b655c}
+.pillars{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid rgba(14,13,12,.15)}
+.pillar{padding:3rem 2.5rem 1rem 0}.pillar+.pillar{border-inline-start:1px solid rgba(14,13,12,.15);padding-inline-start:2.5rem}
+.pillar .num{font-family:"Frank Ruhl Libre",serif;color:#a88a52;font-size:1.1rem;letter-spacing:.1em}
+.pillar h3{font-size:1.55rem;margin:1.2rem 0 .8rem}.pillar p{color:#5d574f;margin:0}
+/* about split */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:6vw;align-items:center}
+.split .ph{aspect-ratio:4/5;overflow:hidden}.split .ph img{width:100%;height:100%;object-fit:cover;filter:grayscale(.3)}
+.split h2{font-size:clamp(2rem,3.6vw,3rem);margin:1rem 0 1.6rem}.split p{color:#cfc8bc}
+.quote{font-family:"Frank Ruhl Libre",serif;font-size:1.35rem;border-inline-start:1px solid var(--gold);padding-inline-start:1.5rem;margin:2rem 0;color:var(--paper)}
+/* guide page */
+.guide{display:grid;grid-template-columns:1.05fr 1fr;gap:6vw;padding:5rem 6vw 8rem;max-width:1400px;margin:auto}
+.guide .ph{position:sticky;top:2rem;aspect-ratio:4/5;overflow:hidden;align-self:start}.guide .ph img{width:100%;height:100%;object-fit:cover}
+.back{font-size:.9rem;letter-spacing:.02em;color:var(--muted);transition:color .3s}.back:hover{color:var(--gold)}
+.guide h1{font-size:clamp(2.6rem,4.5vw,4.2rem);margin:1.2rem 0 1.5rem}
+.guide .lead{color:#cfc8bc;font-size:1.08rem}
+.guide ul{list-style:none;padding:0;margin:1.5rem 0 0}
+.guide li{padding:1.05rem 0;border-bottom:1px solid var(--line);display:flex;gap:1.2rem}
+.guide li span{font-family:"Frank Ruhl Libre",serif;color:var(--gold);min-width:2rem}
+.buy{margin-top:3rem;padding:2.5rem;border:1px solid var(--line);background:var(--ink2)}
+.buy .p{font-family:"Frank Ruhl Libre",serif;font-size:3rem;color:var(--paper);line-height:1}
+.buy .p small{font-size:1rem;color:var(--muted);font-family:"Heebo";margin-inline-start:.6rem}
+.buy .btn{width:100%;justify-content:center;margin-top:1.8rem}
+.buy ol{margin:1.8rem 0 0;padding:0;list-style:none;font-size:.9rem;color:var(--muted)}
+.buy ol li{border:0;padding:.35rem 0}
+.h4{font-size:.85rem;letter-spacing:.04em;color:var(--gold);margin-top:3rem}
+/* simple pages */
+.page{max-width:780px;margin:auto;padding:7rem 6vw 9rem}
+.page h1{font-size:clamp(2.6rem,5vw,4rem);margin:1rem 0 2rem}.page p{color:#cfc8bc;font-size:1.08rem}
+.contact-row{display:flex;justify-content:space-between;gap:1rem;padding:1.6rem 0;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.contact-row span{color:var(--muted);font-size:.9rem;letter-spacing:.02em}
+.contact-row a{font-family:"Frank Ruhl Libre",serif;font-size:1.3rem;transition:color .3s}.contact-row a:hover{color:var(--gold)}
+/* footer */
+footer{border-top:1px solid var(--line);padding:5rem 0 2.5rem}
+.fgrid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:3rem}
+footer h4{font-size:.85rem;letter-spacing:.04em;color:var(--gold);font-weight:400;margin:0 0 1.2rem}
+footer p,footer a{color:var(--muted);font-size:.9rem;display:block;margin:0 0 .5rem}footer a:hover{color:var(--paper)}
+.legal{margin-top:4rem;padding-top:2rem;border-top:1px solid var(--line);display:flex;justify-content:space-between;color:#5f5a53;font-size:.78rem;letter-spacing:.08em}
+/* reveal */
+.rv{opacity:0;transform:translateY(24px);transition:opacity 1s ease,transform 1s ease}.rv.in{opacity:1;transform:none}
+@media(max-width:900px){
+ .grid,.pillars,.split,.guide,.fgrid{grid-template-columns:1fr}
+ .pillar,.pillar+.pillar{padding:2.2rem 0;border-inline-start:0;border-bottom:1px solid rgba(14,13,12,.15)}
+ .head{flex-direction:column;align-items:flex-start}
+ section.block{padding:5.5rem 0}.guide{padding:2rem 6vw 5rem}.guide .ph{position:relative;top:0}
+ .nav{padding:1.4rem 6vw}.nav nav a{margin-inline-start:1.1rem;font-size:.8rem}.brand{font-size:.9rem}
+ .hero{min-height:600px;height:92vh}.legal{flex-direction:column;gap:.5rem}
+}
+
+@media(max-width:900px){.hero h1{font-size:2.6rem}.hero p{font-size:1rem}.btn{padding:.9rem 1.5rem}.hero .wrap{padding-bottom:8vh}}
+@media(max-width:600px){.nav{padding:1.2rem 5vw}.brand{font-size:.85rem;letter-spacing:.12em;white-space:nowrap}.brand small{font-size:.5rem;letter-spacing:.3em}.nav nav a{margin-inline-start:.9rem;font-size:.82rem;white-space:nowrap}.hero .wrap{padding-top:6rem}}

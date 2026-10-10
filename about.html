@@ -1,10 +1,10 @@
 <!DOCTYPE html><html lang="he" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>אודות · Studio Image Photography</title><meta name="description" content="מדריכי צילום אונליין מאת Studio Image Photography"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500&family=Heebo:wght@300;400;500&display=swap" rel="stylesheet"><link rel="stylesheet" href="style.css">
-<script src="config.js"></script><script src="site.js"></script></head><body>
-<main><div class="wrap split" style="padding-top:6rem;padding-bottom:8rem"><div class="ph rv"><img src="img/about.jpg" alt=""></div><div class="rv">
-<div class="eyebrow">אודות</div><h2>צילום הוא שפה שעוברת במשפחה.</h2>
-<p>אני זיו, צלם דור שני ובעלים של Studio Image Photography, סטודיו לצילום באזור חיפה והקריות. גדלתי בין מצלמות, ואת השפה הזו למדתי בבית עוד לפני שהחזקתי מצלמה משלי.</p>
-<p>כבר למעלה מעשר שנים אני מצלם באופן מקצועי. המדריכים נולדו מתוך רצון להנגיש את הידע הזה, בצורה מסודרת, ברורה ומעשית.</p>
-<div class="quote">״תמונה טובה מתחילה הרבה לפני הלחיצה על הכפתור.״</div>
+<script src="site.js"></script></head><body>
+<main><div class="wrap split" style="padding-top:6rem;padding-bottom:8rem"><div class="ph rv"><img src="img/about.jpg" alt="" data-img="about.image"></div><div class="rv">
+<div class="eyebrow">אודות</div><h2 data-t="about.title">צילום הוא שפה שעוברת במשפחה.</h2>
+<div data-h="about.body"><p>אני זיו, צלם דור שני ובעלים של Studio Image Photography, סטודיו לצילום באזור חיפה והקריות. גדלתי בין מצלמות, ואת השפה הזו למדתי בבית עוד לפני שהחזקתי מצלמה משלי.</p>
+<p>כבר למעלה מעשר שנים אני מצלם באופן מקצועי. המדריכים נולדו מתוך רצון להנגיש את הידע הזה, בצורה מסודרת, ברורה ומעשית.</p></div>
+<div class="quote" id="q"></div>
 <div class="btn-row"><a class="btn fill" href="index.html#guides">למדריכים</a><a class="btn" id="b" target="_blank" rel="noopener">להזמנת צילום בסטודיו</a></div></div></div></main>
-<script>$("#b").href=C.bookingUrl;mount(true);</script></body></html>
+<script>boot(()=>{$("#b").href=C.bookingUrl;const q=$("#q");if(C.about.quote){q.textContent="״"+C.about.quote+"״"}else q.remove();mount(true);});</script></body></html>

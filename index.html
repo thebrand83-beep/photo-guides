@@ -1,19 +1,19 @@
 <!DOCTYPE html><html lang="he" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>מדריכי צילום · Studio Image Photography</title><meta name="description" content="מדריכי צילום אונליין מאת Studio Image Photography"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500&family=Heebo:wght@300;400;500&display=swap" rel="stylesheet"><link rel="stylesheet" href="style.css">
-<script src="config.js"></script><script src="site.js"></script></head><body>
-<section class="hero"><img src="img/hero.jpg" alt=""><div class="wrap">
-<div class="eyebrow">Studio Image · מדריכי צילום</div><h1>האור, הרגע, והאומנות שמאחוריהם.</h1>
-<p>מדריכי צילום מעשיים מצלם דור שני, עם למעלה מעשור של עבודה בשטח. ללמוד בקצב שלך, מכל מקום.</p>
+<script src="site.js"></script></head><body>
+<section class="hero"><img src="img/hero.jpg" alt="" data-img="hero.image"><div class="wrap">
+<div class="eyebrow" data-t="hero.eyebrow">Studio Image · מדריכי צילום</div><h1 data-t="hero.title">האור, הרגע, והאומנות שמאחוריהם.</h1>
+<p data-t="hero.subtitle">מדריכי צילום מעשיים מצלם דור שני, עם למעלה מעשור של עבודה בשטח. ללמוד בקצב שלך, מכל מקום.</p>
 <div class="btn-row"><a class="btn fill" href="#guides">לצפייה במדריכים</a><a class="btn" href="about.html">על הצלם</a></div></div></section>
-<section class="block" id="guides"><div class="wrap"><div class="head rv"><div><div class="eyebrow">הקולקציה</div><h2>המדריכים</h2></div><p>כל מדריך מתמקד בנושא אחד, לעומק, עם דגשים שאפשר ליישם כבר בצילום הבא.</p></div><div class="grid" id="g"></div></div></section>
+<section class="block" id="guides"><div class="wrap"><div class="head rv"><div><div class="eyebrow">הקולקציה</div><h2>המדריכים</h2></div><p data-t="guidesIntro">כל מדריך מתמקד בנושא אחד, לעומק, עם דגשים שאפשר ליישם כבר בצילום הבא.</p></div><div class="grid" id="g"></div></div></section>
 <section class="block trust"><div class="wrap"><div class="head rv"><div><div class="eyebrow" style="color:#a88a52">איך זה עובד</div><h2>פשוט, שקוף ובטוח</h2></div><p>בלי מנויים ובלי התחייבות. רוכשים מדריך פעם אחת, והוא נשאר שלכם.</p></div>
 <div class="pillars"><div class="pillar rv"><div class="num">01</div><h3>ידע מעשי מהשטח</h3><p>תוכן שנבנה מתוך עבודה יומיומית בסטודיו ובאירועים, עם דגש על מה שבאמת משנה את התמונה.</p></div>
 <div class="pillar rv"><div class="num">02</div><h3>תשלום מאובטח ב-PayPal</h3><p>התשלום מתבצע ישירות במערכת של PayPal. פרטי האשראי שלכם לא עוברים דרך האתר.</p></div>
 <div class="pillar rv"><div class="num">03</div><h3>מסירה אישית במייל</h3><p>לאחר התשלום המדריך נשלח אליכם באופן אישי לכתובת המייל שבחשבון ה-PayPal.</p></div></div></div></section>
 <div id="rev"></div>
-<section class="block"><div class="wrap split"><div class="ph rv"><img src="img/about.jpg" alt=""></div><div class="rv">
-<div class="eyebrow">על הצלם</div><h2>צילום הוא שפה שעוברת במשפחה.</h2>
-<p>אני זיו, צלם דור שני ובעלים של Studio Image Photography בחיפה ובקריות. כבר למעלה מעשר שנים אני מצלם אנשים, אירועים ורגעים.</p>
-<p>במדריכים אני מעביר את מה שלמדתי מאבי ומשנים של עבודה, בשפה ברורה ובצורה מעשית.</p>
+<section class="block"><div class="wrap split"><div class="ph rv"><img src="img/about.jpg" alt="" data-img="about.image"></div><div class="rv">
+<div class="eyebrow">על הצלם</div><h2 data-t="about.title">צילום הוא שפה שעוברת במשפחה.</h2>
+<div data-h="about.short"><p>אני זיו, צלם דור שני ובעלים של Studio Image Photography בחיפה ובקריות. כבר למעלה מעשר שנים אני מצלם אנשים, אירועים ורגעים.</p>
+<p>במדריכים אני מעביר את מה שלמדתי מאבי ומשנים של עבודה, בשפה ברורה ובצורה מעשית.</p></div>
 <a class="btn" href="about.html" style="margin-top:1.5rem">לסיפור המלא</a></div></div></section>
-<script>$("#g").innerHTML=C.guides.map(card).join("");$("#rev").outerHTML=reviewsSection();initForm();mount(false);</script></body></html>
+<script>boot(()=>{$("#g").innerHTML=C.guides.map(card).join("");$("#rev").outerHTML=reviewsSection();initForm();mount(false);});</script></body></html>

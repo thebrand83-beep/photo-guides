@@ -1,0 +1,172 @@
+media:
+  input: img
+  output: img
+  categories: [image]
+  rename: safe
+
+content:
+  - name: site
+    label: הגדרות האתר
+    type: file
+    path: data/site.json
+    format: json
+    fields:
+      - name: paypalEmail
+        label: מייל חשבון PayPal
+        type: string
+        required: true
+        description: הכתובת שאליה יגיעו התשלומים
+      - name: contactEmail
+        label: מייל ליצירת קשר
+        type: string
+        required: true
+      - name: reviewsEndpoint
+        label: כתובת טופס הביקורות (Formspree)
+        type: string
+        description: לדוגמה https://formspree.io/f/abcd1234. השאר ריק עד שתגדיר.
+      - name: bookingUrl
+        label: קישור להזמנת צילום
+        type: string
+      - name: currency
+        label: מטבע
+        type: string
+        hidden: true
+      - name: area
+        label: אזור פעילות
+        type: string
+      - name: hero
+        label: אזור הפתיחה (דף הבית)
+        type: object
+        fields:
+          - name: eyebrow
+            label: שורה עליונה קטנה
+            type: string
+          - name: title
+            label: כותרת ראשית
+            type: string
+          - name: subtitle
+            label: תת-כותרת
+            type: text
+          - name: image
+            label: תמונת רקע
+            type: image
+      - name: guidesIntro
+        label: טקסט פתיחה לרשימת המדריכים
+        type: text
+      - name: about
+        label: אודות
+        type: object
+        fields:
+          - name: title
+            label: כותרת
+            type: string
+          - name: image
+            label: תמונה
+            type: image
+          - name: short
+            label: טקסט קצר (בדף הבית)
+            type: rich-text
+            options:
+              format: html
+              media: false
+          - name: body
+            label: טקסט מלא (בעמוד אודות)
+            type: rich-text
+            options:
+              format: html
+              media: false
+          - name: quote
+            label: ציטוט (אפשר להשאיר ריק)
+            type: string
+      - name: contact
+        label: עמוד צור קשר
+        type: object
+        fields:
+          - name: title
+            label: כותרת
+            type: string
+          - name: intro
+            label: טקסט פתיחה
+            type: text
+
+  - name: guides
+    label: מדריכים
+    type: file
+    path: data/guides.json
+    format: json
+    list: true
+    fields:
+      - name: title
+        label: שם המדריך
+        type: string
+        required: true
+      - name: id
+        label: מזהה באנגלית (לכתובת העמוד)
+        type: string
+        required: true
+        pattern:
+          regex: "^[a-z0-9-]+$"
+          message: אותיות אנגליות קטנות, ספרות ומקף בלבד
+        description: לדוגמה portrait. לא לשנות אחרי שיש ביקורות על המדריך.
+      - name: price
+        label: מחיר בשקלים
+        type: number
+        required: true
+        options:
+          min: 0
+      - name: level
+        label: רמה
+        type: string
+        description: לדוגמה מתחילים, בינוניים, כל הרמות
+      - name: image
+        label: תמונת שער
+        type: image
+        required: true
+      - name: short
+        label: תיאור קצר
+        type: text
+      - name: description
+        label: תיאור מלא
+        type: rich-text
+        options:
+          format: html
+          media: false
+      - name: topics
+        label: מה לומדים במדריך
+        type: string
+        list: true
+      - name: example
+        label: להציג תגית "דוגמה"
+        type: boolean
+        description: כבה כשהמדריך אמיתי
+
+  - name: reviews
+    label: ביקורות מאושרות
+    type: file
+    path: data/reviews.json
+    format: json
+    list: true
+    fields:
+      - name: name
+        label: שם הכותב
+        type: string
+        required: true
+      - name: guide
+        label: מזהה המדריך
+        type: string
+        required: true
+        description: ה-id של המדריך, לדוגמה portrait
+      - name: rating
+        label: דירוג (1 עד 5 כוכבים)
+        type: number
+        required: true
+        options:
+          min: 1
+          max: 5
+      - name: date
+        label: תאריך
+        type: date
+      - name: text
+        label: טקסט הביקורת
+        type: text
+        required: true

@@ -1,0 +1,9 @@
+*{box-sizing:border-box}body{margin:0;font-family:"Heebo",Arial,sans-serif;background:#faf8f5;color:#222;line-height:1.7}
+a{color:inherit}header{background:#111;color:#fff;padding:1rem 5%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap}
+header nav a{margin-inline-start:1.2rem;text-decoration:none;opacity:.85}header .logo{font-weight:700;font-size:1.3rem;text-decoration:none}
+.hero{background:linear-gradient(135deg,#1c1c1c,#3a2f25);color:#fff;text-align:center;padding:5rem 5%}.hero h1{font-size:2.4rem;margin:0 0 .5rem}
+main{max-width:1100px;margin:auto;padding:2.5rem 5%}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem}
+.card{background:#fff;border-radius:14px;box-shadow:0 4px 18px #0001;padding:1.6rem;display:flex;flex-direction:column}.card h3{margin-top:0}
+.price{font-size:1.4rem;font-weight:700;color:#a0672b}.btn{display:inline-block;background:#a0672b;color:#fff;padding:.7rem 1.4rem;border-radius:8px;text-decoration:none;border:0;font-size:1rem;cursor:pointer;margin-top:auto;text-align:center}
+.btn.paypal{background:#0070ba}.note{background:#fff7e6;border-inline-start:4px solid #a0672b;padding:1rem;border-radius:6px;margin-top:1.5rem}
+.badge{background:#ffe08a;color:#5a4300;font-size:.8rem;padding:.15rem .6rem;border-radius:20px}footer{text-align:center;padding:2rem;color:#777;font-size:.9rem}

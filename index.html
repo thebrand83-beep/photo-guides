@@ -1,0 +1,5 @@
+<!DOCTYPE html><html lang="he" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>מדריכי צילום | Studio Image Photography</title><link rel="stylesheet" href="style.css"><script src="config.js"></script></head><body>
+<header><a class="logo" href="index.html">Studio Image Photography</a><nav><a href="index.html">מדריכים</a><a href="about.html">אודות</a><a href="contact.html">צור קשר</a></nav></header>
+<section class="hero"><h1>מדריכי צילום אונליין</h1><p>ללמוד לצלם מצלם דור שני עם ניסיון של למעלה מ-10 שנים</p></section>
+<main><h2>המדריכים <span class="badge">נתוני דוגמה</span></h2><div class="grid" id="g"></div></main><footer>© Studio Image Photography · חיפה והקריות</footer><script>const c=SITE_CONFIG;document.getElementById("g").innerHTML=c.guides.map(g=>`<div class="card"><h3>${g.title}</h3><p>${g.short}</p><p class="price">₪${g.price}</p><a class="btn" href="guide.html?id=${g.id}">לפרטים ורכישה</a></div>`).join("")</script></body></html>

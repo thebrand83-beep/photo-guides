@@ -1,0 +1,8 @@
+<!DOCTYPE html><html lang="he" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>מדריך | Studio Image Photography</title><link rel="stylesheet" href="style.css"><script src="config.js"></script></head><body>
+<header><a class="logo" href="index.html">Studio Image Photography</a><nav><a href="index.html">מדריכים</a><a href="about.html">אודות</a><a href="contact.html">צור קשר</a></nav></header>
+<main id="m"></main><footer>© Studio Image Photography · חיפה והקריות</footer><script>const c=SITE_CONFIG,id=new URLSearchParams(location.search).get("id"),g=c.guides.find(x=>x.id==id)||c.guides[0];
+document.title=g.title;const pp="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business="+encodeURIComponent(c.paypalEmail)+"&item_name="+encodeURIComponent(g.title)+"&amount="+g.price+"&currency_code="+c.currency;
+document.getElementById("m").innerHTML=`<p><a href="index.html">← חזרה לכל המדריכים</a></p><h1>${g.title}</h1><p>${g.description}</p><h3>מה במדריך</h3><ul>${g.topics.map(t=>`<li>${t}</li>`).join("")}</ul>
+<p class="price">₪${g.price}</p><a class="btn paypal" href="${pp}" target="_blank" rel="noopener">לרכישה מאובטחת ב-PayPal</a>
+<div class="note">📩 לאחר התשלום, המדריך יישלח אליך ידנית למייל המעודכן בחשבון ה-PayPal, בדרך כלל תוך 24 שעות. שאלות? <a href="mailto:${c.contactEmail}">${c.contactEmail}</a></div>`</script></body></html>

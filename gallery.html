@@ -1,0 +1,33 @@
+<!DOCTYPE html><html lang="he" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>גלריה · Studio Image Photography</title><meta name="description" content="מדריכי צילום מעשיים מצלם דור שני עם למעלה מעשור של ניסיון. לומדים בקצב שלכם, מכל מקום. Studio Image Photography, חיפה והקריות."><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500&family=Heebo:wght@300;400;500&display=swap"><link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500&family=Heebo:wght@300;400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'"><noscript><link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500&family=Heebo:wght@300;400;500&display=swap" rel="stylesheet"></noscript><meta name="theme-color" content="#0e0d0c"><link rel="icon" type="image/png" href="favicon.png"><link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta property="og:type" content="website"><meta property="og:locale" content="he_IL"><meta property="og:site_name" content="Studio Image Photography"><meta property="og:title" content="מדריכי צילום אונליין | Studio Image Photography"><meta property="og:description" content="מדריכי צילום מעשיים מצלם דור שני עם למעלה מעשור של ניסיון. לומדים בקצב שלכם, מכל מקום. Studio Image Photography, חיפה והקריות."><meta property="og:url" content="https://thebrand83-beep.github.io/photo-guides/gallery.html"><meta property="og:image" content="https://thebrand83-beep.github.io/photo-guides/img/og.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="מצלמה וינטג׳ ותמונות על מפה">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="מדריכי צילום אונליין | Studio Image Photography"><meta name="twitter:description" content="מדריכי צילום מעשיים מצלם דור שני עם למעלה מעשור של ניסיון. לומדים בקצב שלכם, מכל מקום. Studio Image Photography, חיפה והקריות."><meta name="twitter:image" content="https://thebrand83-beep.github.io/photo-guides/img/og.jpg"><link rel="stylesheet" href="style.css">
+<script src="site.js"></script></head><body>
+<main class="gal"><div class="wrap"><div class="head rv in"><div><div class="eyebrow">פורטפוליו</div><h2 style="font-size:clamp(2.4rem,5vw,4rem)">גלריה</h2></div><p>רגעים, אור ואנשים. מבחר עבודות מהסטודיו ומהשטח.</p></div>
+<div class="filters" id="flt" role="tablist"></div><div class="masonry" id="grid"></div></div></main>
+<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="תצוגת תמונה">
+<button class="lbx" id="lbx" aria-label="סגירה">✕</button><button class="lbn lbprev" id="lbp" aria-label="התמונה הקודמת">›</button><button class="lbn lbnext" id="lbn" aria-label="התמונה הבאה">‹</button>
+<figure><img id="lbi" alt=""><figcaption><b id="lbt"></b><span id="lbc"></span><small id="lbk"></small></figcaption></figure></div>
+<script>const CATS={portraits:"פורטרטים",weddings:"חתונות ואירועים",family:"משפחה",landscape:"נוף",products:"מוצרים",other:"אחר"};
+boot(async()=>{mount(true);
+let items=[];try{items=await fetch("data/gallery.json?v="+Date.now()).then(r=>r.json())}catch(e){}
+items=(items||[]).filter(x=>x&&x.image).map(x=>Object.assign({},x,{image:src(x.image)}));
+let cur="all",view=items,idx=0;const cats=[...new Set(items.map(x=>x.category).filter(Boolean))];
+$("#flt").innerHTML=cats.length>1?[["all","הכל"],...cats.map(c=>[c,CATS[c]||c])].map(([k,l])=>`<button class="fbtn${k==="all"?" on":""}" data-c="${esc(k)}">${esc(l)}</button>`).join(""):"";
+function render(){view=cur==="all"?items:items.filter(x=>x.category===cur);
+ $("#grid").innerHTML=view.length?view.map((x,i)=>`<button class="gi" data-i="${i}" aria-label="${esc(x.title||x.alt||"תמונה")}"><img src="${esc(x.image)}" alt="${esc(x.alt||x.title||"")}" loading="${i<4?"eager":"lazy"}" decoding="async"${x.w?` width="${x.w}" height="${x.h}"`:""}>${x.example?'<span class="tag">דוגמה</span>':""}${x.title?`<span class="gcap">${esc(x.title)}</span>`:""}</button>`).join(""):'<div class="aempty">התמונות יעלו בקרוב.</div>';}
+$("#flt").onclick=e=>{const b=e.target.closest(".fbtn");if(!b)return;cur=b.dataset.c;document.querySelectorAll(".fbtn").forEach(x=>x.classList.toggle("on",x===b));render()};
+const lb=$("#lb"),img=$("#lbi");let last=null;
+function open(i){idx=(i+view.length)%view.length;const x=view[idx];img.classList.remove("show");img.src=x.image;img.alt=x.alt||x.title||"";
+ img.onload=()=>img.classList.add("show");$("#lbt").textContent=x.title||"";$("#lbc").textContent=CATS[x.category]||x.category||"";$("#lbk").textContent=(idx+1)+" / "+view.length+(x.example?" · דוגמה":"");
+ [view[(idx+1)%view.length],view[(idx-1+view.length)%view.length]].forEach(n=>{if(n){const p=new Image();p.src=n.image}})}
+function show(i){last=document.activeElement;lb.hidden=false;document.body.classList.add("lb-open");open(i);$("#lbx").focus()}
+function close(){lb.hidden=true;document.body.classList.remove("lb-open");if(last)last.focus()}
+$("#grid").onclick=e=>{const b=e.target.closest(".gi");if(b)show(+b.dataset.i)};
+$("#lbx").onclick=close;$("#lbn").onclick=()=>open(idx+1);$("#lbp").onclick=()=>open(idx-1);
+lb.onclick=e=>{if(e.target===lb||e.target.tagName==="FIGURE")close()};
+document.addEventListener("keydown",e=>{if(lb.hidden)return;if(e.key==="Escape")close();if(e.key==="ArrowLeft")open(idx+1);if(e.key==="ArrowRight")open(idx-1);
+ if(e.key==="Tab"){const f=[...lb.querySelectorAll("button")];const i=f.indexOf(document.activeElement);e.preventDefault();f[(i+(e.shiftKey?-1:1)+f.length)%f.length].focus()}});
+let sx=0,sy=0;lb.addEventListener("touchstart",e=>{sx=e.touches[0].clientX;sy=e.touches[0].clientY},{passive:true});
+lb.addEventListener("touchend",e=>{const dx=e.changedTouches[0].clientX-sx,dy=e.changedTouches[0].clientY-sy;if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy))open(idx+(dx>0?1:-1));else if(dy>90)close()});
+render();});</script></body></html>

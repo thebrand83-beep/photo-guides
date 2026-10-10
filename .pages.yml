@@ -1,8 +1,16 @@
 media:
-  input: img
-  output: img
-  categories: [image]
-  rename: safe
+  - name: images
+    label: תמונות
+    input: img
+    output: img
+    categories: [image]
+    rename: safe
+  - name: gallery
+    label: תמונות גלריה
+    input: img/gallery
+    output: img/gallery
+    categories: [image]
+    rename: safe
 
 content:
   - name: site
@@ -32,7 +40,7 @@ content:
         type: string
         description: לדוגמה https://formspree.io/f/abcd1234. השאר ריק עד שתגדיר.
       - name: bookingUrl
-        label: קישור להזמנת צילום (ברירת מחדל: booking.html)
+        label: "קישור להזמנת צילום (ברירת מחדל: booking.html)"
         type: string
       - name: currency
         label: מטבע
@@ -57,6 +65,8 @@ content:
           - name: image
             label: תמונת רקע
             type: image
+            options:
+              media: images
       - name: guidesIntro
         label: טקסט פתיחה לרשימת המדריכים
         type: text
@@ -70,6 +80,8 @@ content:
           - name: image
             label: תמונה
             type: image
+            options:
+              media: images
           - name: short
             label: טקסט קצר (בדף הבית)
             type: rich-text
@@ -128,6 +140,8 @@ content:
       - name: image
         label: תמונת שער
         type: image
+        options:
+          media: images
         required: true
       - name: short
         label: תיאור קצר
@@ -177,3 +191,51 @@ content:
         label: טקסט הביקורת
         type: text
         required: true
+
+  - name: gallery
+    label: גלריה
+    type: file
+    path: data/gallery.json
+    format: json
+    list: true
+    fields:
+      - name: image
+        label: תמונה
+        type: image
+        required: true
+        options:
+          media: gallery
+        description: מומלץ לכווץ לפני העלאה (עד כ-1600 פיקסלים בצד הארוך, עד כ-400KB)
+      - name: title
+        label: כותרת
+        type: string
+      - name: category
+        label: קטגוריה
+        type: select
+        options:
+          values:
+            - { name: portraits, label: פורטרטים }
+            - { name: weddings, label: חתונות ואירועים }
+            - { name: family, label: משפחה }
+            - { name: landscape, label: נוף }
+            - { name: products, label: מוצרים }
+            - { name: other, label: אחר }
+      - name: alt
+        label: תיאור התמונה (לנגישות)
+        type: string
+      - name: example
+        label: להציג תגית "דוגמה"
+        type: boolean
+        description: כבה (או מחק את התמונה) כשזו תמונה שלך
+      - name: credit
+        label: קרדיט
+        type: string
+        hidden: true
+      - name: w
+        label: רוחב
+        type: number
+        hidden: true
+      - name: h
+        label: גובה
+        type: number
+        hidden: true

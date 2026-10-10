@@ -11,21 +11,21 @@ async function boot(fn){const v="?v="+Date.now();const get=f=>fetch("data/"+f+v)
 const $=s=>document.querySelector(s);
 const nis=n=>"₪"+Number(n).toLocaleString("he-IL");
 const tag=g=>g.example?'<span class="tag">דוגמה</span>':"";
-function header(solid){return `<header class="nav${solid?" solid":""}"><a class="brand" href="index.html">Studio Image<small>PHOTOGRAPHY · GUIDES</small></a><nav><a href="index.html#guides">מדריכים</a><a href="about.html">אודות</a><a href="contact.html">צור קשר</a></nav></header>`}
+function header(solid){return `<header class="nav${solid?" solid":""}"><a class="brand" href="index.html">Studio Image<small>PHOTOGRAPHY · GUIDES</small></a><button class="burger" type="button" aria-label="תפריט" aria-expanded="false" onclick="const o=document.body.classList.toggle('menu-open');this.setAttribute('aria-expanded',o)"><span></span><span></span></button><nav onclick="document.body.classList.remove('menu-open')"><a href="index.html#guides">מדריכים</a><a href="about.html">אודות</a><a href="contact.html">צור קשר</a></nav></header>`}
 function footer(){return `<footer><div class="wrap"><div class="fgrid"><div><a class="brand" href="index.html" style="color:var(--paper)">Studio Image<small>PHOTOGRAPHY · GUIDES</small></a><p style="margin-top:1.4rem;max-width:22rem">מדריכי צילום מעשיים מצלם דור שני, מתוך למעלה מעשור של עבודה בשטח.</p></div>
-<div><h4>ניווט</h4><a href="index.html#guides">מדריכים</a><a href="about.html">אודות</a><a href="contact.html">צור קשר</a></div>
-<div><h4>סטודיו</h4><p>${esc(C.area||"")}</p><a href="mailto:${C.contactEmail}">${C.contactEmail}</a><a href="${C.bookingUrl}" target="_blank" rel="noopener">הזמנת צילום</a></div></div>
+<div><div class="fh">ניווט</div><a href="index.html#guides">מדריכים</a><a href="about.html">אודות</a><a href="contact.html">צור קשר</a></div>
+<div><div class="fh">סטודיו</div><p>${esc(C.area||"")}</p><a href="mailto:${C.contactEmail}">${C.contactEmail}</a><a href="${C.bookingUrl}" target="_blank" rel="noopener">הזמנת צילום</a></div></div>
 <div class="legal"><span>© ${new Date().getFullYear()} Studio Image Photography</span><span>תשלום מאובטח באמצעות PayPal · <a href="admin.html" style="display:inline;color:inherit;font-size:inherit">כניסת מנהל</a></span></div></div></footer>`}
 function mount(solid){document.body.insertAdjacentHTML("afterbegin",header(solid));document.body.insertAdjacentHTML("beforeend",footer());
  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}}),{threshold:.12});
  document.querySelectorAll(".rv").forEach(el=>io.observe(el));}
-function card(g){return `<a class="card rv" href="guide.html?id=${g.id}"><div class="ph"><img src="${g.image}" alt="${g.title}">${tag(g)}</div>
+function card(g){return `<a class="card rv" href="guide.html?id=${g.id}"><div class="ph"><img src="${g.image}" alt="${esc(g.title)}" loading="lazy" decoding="async" width="900" height="1125">${tag(g)}</div>
 <div class="meta"><h3>${g.title}</h3><span class="price">${nis(g.price)}</span></div><div class="lvl">${g.level||""}</div>${ratingLine(g.id)}<span class="more">לפרטי המדריך ←</span></a>`}
 const ppReady=()=>/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(C.paypalEmail||"")&&!/YOUR_|example\.com/i.test(C.paypalEmail);
 function paypal(g){const base=location.href.split("?")[0].replace(/[^/]*$/,"");const q=new URLSearchParams({cmd:"_xclick",business:C.paypalEmail,item_name:g.title,item_number:g.id,amount:Number(g.price).toFixed(2),currency_code:C.currency||"ILS",no_shipping:"1",charset:"utf-8",lc:"he_IL","return":base+"thanks.html",cancel_return:base+"guide.html?id="+g.id});return "https://www.paypal.com/cgi-bin/webscr?"+q}
 function buyBtn(g){return ppReady()?`<a class="btn fill" href="${paypal(g)}" rel="noopener">לרכישה מאובטחת ב-PayPal</a>`:`<button class="btn fill" type="button" onclick="document.getElementById('ppmsg').hidden=false">לרכישה מאובטחת ב-PayPal</button><div class="ppmsg" id="ppmsg" hidden><b>מערכת התשלומים בהקמה</b>הרכישה באתר תיפתח בקרוב. בינתיים אפשר להזמין את המדריך במייל: <a href="mailto:${C.contactEmail}">${C.contactEmail}</a></div>`}
 const STAR='<svg viewBox="0 0 24 24"><path d="M12 2.6l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.4l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/></svg>';
-const stars=r=>(r=Math.max(0,Math.min(5,+r||0)),0)||`<span class="stars" aria-label="${r} מתוך 5">${[1,2,3,4,5].map(i=>`<i class="${i<=Math.round(r)?"on":""}">${STAR}</i>`).join("")}</span>`;
+const stars=r=>(r=Math.max(0,Math.min(5,+r||0)),0)||`<span class="stars" role="img" aria-label="${r} מתוך 5">${[1,2,3,4,5].map(i=>`<i class="${i<=Math.round(r)?"on":""}">${STAR}</i>`).join("")}</span>`;
 const revsFor=id=>(C.reviews||[]).filter(r=>!id||r.guide===id);
 function avg(id){const r=revsFor(id);return r.length?{n:r.length,a:r.reduce((s,x)=>s+(+x.rating||0),0)/r.length}:null}
 function ratingLine(id){const a=avg(id);return a?`<div class="rating">${stars(a.a)}<b>${a.a.toFixed(1)}</b><span>(${a.n} ${a.n==1?"ביקורת":"ביקורות"})</span></div>`:`<div class="rating none">טרם דורג</div>`}

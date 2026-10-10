@@ -123,3 +123,28 @@ footer p,footer a{color:var(--muted);font-size:.9rem;display:block;margin:0 0 .5
 @media(max-width:900px){.rgrid{grid-template-columns:1fr}.review,.rform{padding:1.8rem}}
 .ppmsg{margin-top:1.2rem;padding:1.3rem 1.5rem;border:1px solid var(--gold);background:rgba(194,164,109,.08);color:#d9d3c8;font-size:.92rem;animation:fade .5s ease}.ppmsg b{display:block;font-family:"Frank Ruhl Libre",serif;font-weight:400;font-size:1.2rem;color:var(--gold);margin-bottom:.3rem}.ppmsg a{color:var(--gold)}@keyframes fade{from{opacity:0;transform:translateY(6px)}}
 .steps{list-style:none;padding:0;margin:1.2rem 0 0}.steps li{padding:1.1rem 0;border-bottom:1px solid var(--line);display:flex;gap:1.2rem;color:#cfc8bc}.steps li span{font-family:"Frank Ruhl Libre",serif;color:var(--gold);min-width:2rem}.steps b{color:var(--paper);font-weight:400}.lead p{margin:0 0 1em}
+/* a11y + mobile pass */
+footer .fh{font-size:.85rem;letter-spacing:.04em;color:var(--gold);margin:0 0 1.2rem}
+.legal{color:#8d877e}.rating.none{color:#8d877e}
+.burger{display:none}
+@media(max-width:600px){
+ .brand small{font-size:.62rem;letter-spacing:.22em}
+ .burger{display:flex;flex-direction:column;justify-content:center;gap:7px;width:44px;height:44px;background:none;border:0;padding:10px;cursor:pointer;position:relative;z-index:30}
+ .burger span{display:block;height:1px;background:var(--paper);transition:transform .35s,opacity .35s}
+ .menu-open .burger span:first-child{transform:translateY(4px) rotate(45deg)}.menu-open .burger span:last-child{transform:translateY(-4px) rotate(-45deg)}
+ .nav nav{position:fixed;inset:0;z-index:20;background:rgba(14,13,12,.97);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;opacity:0;visibility:hidden;transition:opacity .35s,visibility .35s}
+ .menu-open .nav nav{opacity:1;visibility:visible}.menu-open{overflow:hidden}
+ .nav nav a{margin:0;font-family:"Frank Ruhl Libre",serif;font-size:1.9rem;padding:.6rem 2rem;min-height:44px;opacity:1}
+ .menu-open .nav{z-index:25}
+ footer a,footer p{padding:.55rem 0;margin:0}
+ .legal a{padding:.8rem 0!important;display:inline-block!important}
+ .starpick button{width:44px;height:44px;padding:7px}
+ .back{display:inline-block;padding:.75rem 0}
+ .contact-row{align-items:center;padding:1rem 0}.contact-row a{padding:.5rem 0;min-height:44px;display:inline-flex;align-items:center}
+ .buy ol a,.ppmsg a,.page p a{display:inline-block;padding:.6rem 0}
+ .tag{font-size:.78rem}
+ .card .more{padding:.8rem 0 .4rem}
+}
+@media(max-width:600px){footer a,footer p{padding:.65rem 0}.brand{padding:.2rem 0;min-height:46px}.brand small{font-size:.7rem;letter-spacing:.18em}}
+@media(max-width:600px){.brand small{font-size:.75rem;letter-spacing:.14em}}
+@media(max-width:600px){.buy ol a{display:inline;padding:0}.buy ol li{padding:.5rem 0}}

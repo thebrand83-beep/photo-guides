@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /photo-guides/admin.html
+Disallow: /photo-guides/reviews-admin.html
+Disallow: /photo-guides/bookings-admin.html
+Disallow: /photo-guides/thanks.html
+
+Sitemap: https://thebrand83-beep.github.io/photo-guides/sitemap.xml

@@ -221,3 +221,4 @@ footer .pbtns.sm{margin:.8rem 0 .6rem;gap:.6rem}footer .pbtns.sm .pbtn{display:i
 .lb-open{overflow:hidden}
 @media(max-width:600px){.gal{padding:3.5rem 0 5rem}.masonry{columns:2;column-gap:.6rem}.gi{margin-bottom:.6rem}.gi .gcap{display:none}.gi .tag{font-size:.68rem;top:.5rem;inset-inline-start:.5rem;padding:.15rem .45rem}
  .lbn{top:auto;bottom:1.2rem;transform:none;width:56px;height:56px}.lb img{max-height:72vh;max-width:100vw}.lb figure{max-width:100vw}.lbx{top:1rem;inset-inline-end:1rem;width:48px;height:48px}}
+.split h1.h2like{font-size:clamp(2rem,3.6vw,3rem);margin:1rem 0 1.6rem}h2.h4{font-family:"Heebo",sans-serif;font-weight:400}

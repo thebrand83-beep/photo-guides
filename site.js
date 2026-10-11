@@ -25,7 +25,7 @@ function footer(){return `<footer><div class="wrap"><div class="fgrid"><div><a c
 function mount(solid){document.body.insertAdjacentHTML("afterbegin",header(solid));document.body.insertAdjacentHTML("beforeend",footer());
  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}}),{threshold:.12});
  document.querySelectorAll(".rv").forEach(el=>io.observe(el));}
-function card(g){return `<a class="card rv" href="guide.html?id=${g.id}"><div class="ph"><img src="${g.image}" alt="${esc(g.title)}" loading="lazy" decoding="async" width="900" height="1125">${tag(g)}</div>
+function card(g){return `<a class="card rv" href="guide-${g.id}.html"><div class="ph"><img src="${g.image}" alt="${esc(g.title)}" loading="lazy" decoding="async" width="900" height="1125">${tag(g)}</div>
 <div class="meta"><h3>${g.title}</h3><span class="price">${nis(g.price)}</span></div><div class="lvl">${g.level||""}</div>${ratingLine(g.id)}<span class="more">לפרטי המדריך ←</span></a>`}
 const ppReady=()=>/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(C.paypalEmail||"")&&!/YOUR_|example\.com/i.test(C.paypalEmail);
 function paypal(g){const base=location.href.split("?")[0].replace(/[^/]*$/,"");const q=new URLSearchParams({cmd:"_xclick",business:C.paypalEmail,item_name:g.title,item_number:g.id,amount:Number(g.price).toFixed(2),currency_code:C.currency||"ILS",no_shipping:"1",charset:"utf-8",lc:"he_IL","return":base+"thanks.html",cancel_return:base+"guide.html?id="+g.id});return "https://www.paypal.com/cgi-bin/webscr?"+q}

@@ -237,3 +237,4 @@ footer .pbtns.sm{margin:.8rem 0 .6rem;gap:.6rem}footer .pbtns.sm .pbtn{display:i
 .consent.shake{animation:shake .5s}@keyframes shake{25%{transform:translateX(-6px)}50%{transform:translateX(6px)}75%{transform:translateX(-3px)}}
 .leglinks{display:inline-flex;gap:1.2rem}.leglinks a{display:inline!important;color:inherit!important;font-size:inherit!important;margin:0!important}
 @media(max-width:600px){.leglinks a{padding:.8rem 0!important;display:inline-block!important}}
+.vat{display:block;font-size:.68rem;letter-spacing:.04em;color:var(--muted);font-family:Heebo,sans-serif;margin-top:.2rem;text-align:end}.buy .vat-note{color:var(--muted);font-size:.85rem;margin:-.4rem 0 0}

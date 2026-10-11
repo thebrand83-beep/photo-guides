@@ -57,7 +57,7 @@ def set_head(h, title, desc, path, ld, noindex=False, ogtype="website", image=No
 def card(g):
     tag = '<span class="tag">דוגמה</span>' if g.get("example") else ""
     return (f'<a class="card rv" href="guide-{E(g["id"])}.html"><div class="ph"><img src="{E(g["image"])}" alt="{E(g["title"])}" loading="lazy" decoding="async" width="900" height="1125">{tag}</div>'
-            f'<div class="meta"><h3>{E(g["title"])}</h3><span class="price">{nis(g["price"])}</span></div><div class="lvl">{E(g.get("level"))}</div><span class="more">לפרטי המדריך ←</span></a>')
+            f'<div class="meta"><h3>{E(g["title"])}</h3><span class="price">{nis(g["price"])}<small class="vat">עוסק פטור – לא נגבה מע"מ</small></span></div><div class="lvl">{E(g.get("level"))}</div><span class="more">לפרטי המדריך ←</span></a>')
 
 # 1. per-page meta on static pages
 for f, (t, d, p, ld) in PAGES.items():
@@ -88,7 +88,7 @@ for g in guides:
             f'<nav aria-label="breadcrumb" class="back"><a href="index.html">ראשי</a> / <a href="index.html#guides">מדריכים</a> / {E(title)}</nav>'
             f'<div class="eyebrow" style="margin-top:2.5rem">מדריך · {E(g.get("level"))}</div><h1>{E(title)}</h1>'
             f'<div class="lead">{g.get("description") or ""}</div><h2 class="h4">מה תלמדו</h2><ul>{topics}</ul>'
-            f'<div class="buy"><div class="eyebrow" style="margin-bottom:1rem">רכישה חד-פעמית</div><div class="p">{nis(g["price"])}</div>'
+            f'<div class="buy"><div class="eyebrow" style="margin-bottom:1rem">רכישה חד-פעמית</div><div class="p">{nis(g["price"])}</div><p class="vat-note">עוסק פטור – לא נגבה מע"מ</p>'
             f'<a class="btn fill" href="guide.html?id={E(gid)}">לרכישה מאובטחת ב-PayPal</a></div></div>')
     ld = [{"@type": "Product", "@id": BASE + f"guide-{gid}.html#product", "name": title, "description": strip(g.get("description")) or desc,
            "image": BASE + g["image"], "brand": {"@type": "Brand", "name": BRAND}, "category": "מדריך צילום דיגיטלי",

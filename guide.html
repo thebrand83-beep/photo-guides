@@ -11,4 +11,4 @@ $("#m").innerHTML=`<div class="ph"><img src="${g.image}" alt="${esc(g.title)}" w
 <h2 class="h4">מה תלמדו</h2><ul>${g.topics.map((t,i)=>`<li><span>${String(i+1).padStart(2,"0")}</span>${t}</li>`).join("")}</ul>
 <div class="buy"><div class="eyebrow" style="margin-bottom:1rem">רכישה חד-פעמית</div><div class="p">${nis(g.price)}</div>
 ${buyBtn(g)}
-<ol><li>01 · התשלום מתבצע במערכת המאובטחת של PayPal</li><li>02 · המדריך נשלח אליכם ידנית במייל, בדרך כלל תוך 24 שעות</li><li>03 · שאלות? <a href="mailto:${C.contactEmail}" style="color:var(--gold)">${C.contactEmail}</a></li></ol></div></div>`;$("#rev").outerHTML=reviewsSection(g.id);initForm();mount(true);});</script></body></html>
+<ol><li>01 · התשלום מתבצע במערכת המאובטחת של PayPal</li><li>02 · המדריך נשלח אליכם ידנית במייל, תוך 24 שעות מאישור התשלום</li><li>03 · שאלות? <a href="mailto:${C.contactEmail}" style="color:var(--gold)">${C.contactEmail}</a></li></ol></div></div>`;$("#rev").outerHTML=reviewsSection(g.id);initForm();mount(true);});</script></body></html>

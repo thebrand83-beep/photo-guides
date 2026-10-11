@@ -17,7 +17,7 @@ ORG = {"@type": ["LocalBusiness", "ProfessionalService"], "@id": BASE + "#busine
        "url": BASE, "image": BASE + "img/og.jpg", "logo": BASE + "apple-touch-icon.png",
        "telephone": intl(site.get("phone")), "email": site.get("contactEmail"),
        "areaServed": [{"@type": "City", "name": n} for n in ["חיפה", "הקריות", "עכו", "נהריה"]],
-       "address": {"@type": "PostalAddress", "addressRegion": "חיפה והקריות", "addressCountry": "IL"}}
+       "address": {"@type": "PostalAddress", "addressLocality": "קריית ביאליק", "addressRegion": "חיפה והקריות", "addressCountry": "IL"}}
 WEBSITE = {"@type": "WebSite", "@id": BASE + "#website", "url": BASE, "name": BRAND, "inLanguage": "he-IL", "publisher": {"@id": BASE + "#business"}}
 def crumbs(*items):
     return {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": i + 1, "name": n, "item": BASE + u} for i, (n, u) in enumerate(items)]}

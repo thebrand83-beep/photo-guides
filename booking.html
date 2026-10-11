@@ -16,6 +16,7 @@
 <label>טלפון<input name="phone" type="tel" required maxlength="20" inputmode="tel" autocomplete="tel" dir="ltr" placeholder="050-0000000"></label>
 <label>מייל (לא חובה)<input name="email" type="email" maxlength="120" autocomplete="email" dir="ltr"></label>
 <label>הערות (לא חובה)<textarea name="notes" rows="3" maxlength="1000" placeholder="מה תרצו לצלם? כמה משתתפים?"></textarea></label>
+<label class="consent sm"><input type="checkbox" name="agree" required><span>קראתי ואני מסכים/ה ל<a href="privacy.html" target="_blank" rel="noopener">מדיניות הפרטיות</a> ול<a href="terms.html#t7" target="_blank" rel="noopener">תנאי קביעת הפגישות</a>, ולכך שאקבל מענה בוואטסאפ או בטלפון</span></label>
 <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);opacity:0;pointer-events:none">
 </div></div>
 <div class="summary" id="sum" hidden></div>
@@ -49,6 +50,7 @@ $("#prev").onclick=()=>{month.setMonth(month.getMonth()-1);day=slot=null;loadMon
 $("#bf").onsubmit=async e=>{e.preventDefault();const f=e.target,m=$("#bm");m.className="fmsg";
  if(f._honey.value)return;
  if(!svc||!slot){m.textContent="בחרו שירות, תאריך ושעה.";m.classList.add("err");return}
+ if(!f.agree.checked){m.textContent="נא לאשר את מדיניות הפרטיות ותנאי הפגישות.";m.classList.add("err");return}
  if(f.name.value.trim().length<2||!/^[0-9+\- ()]{9,20}$/.test(f.phone.value.trim())){m.textContent="נא למלא שם וטלפון תקין.";m.classList.add("err");return}
  const btn=f.querySelector("[type=submit]");btn.disabled=true;m.textContent="שולח...";
  try{const r=await rpc("create_booking",{p_service:svc.id,p_start:slot,p_name:f.name.value.trim(),p_phone:f.phone.value.trim(),p_email:f.email.value.trim(),p_notes:f.notes.value.trim()});

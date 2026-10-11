@@ -31,6 +31,9 @@ PAGES = {
    "שאלות על מדריכי הצילום או הזמנת צילום? טלפון, וואטסאפ ומייל של Studio Image Photography. חיפה, הקריות, עכו ונהריה.", "contact.html", [crumbs(("ראשי", ""), ("צור קשר", "contact.html"))]),
  "booking.html": ("קביעת פגישה לצילום אונליין | Studio Image Photography",
    "קביעת פגישה לצילום בסטודיו או בחוץ: בוחרים שירות, תאריך ושעה פנויים, ומקבלים אישור בוואטסאפ. חיפה והקריות.", "booking.html", [crumbs(("ראשי", ""), ("קביעת פגישה", "booking.html"))]),
+ "terms.html": ("תקנון ותנאי שימוש | Studio Image Photography", "תקנון האתר: רכישת מדריכי צילום דיגיטליים, תשלום ב-PayPal, מסירה, ביטולים, זכויות יוצרים, קביעת פגישות וביקורות.", "terms.html", [crumbs(("ראשי", ""), ("תקנון", "terms.html"))]),
+ "privacy.html": ("מדיניות פרטיות | Studio Image Photography", "איזה מידע נאסף באתר, לאיזו מטרה, עם מי הוא משותף ומה הזכויות שלכם לפי חוק הגנת הפרטיות.", "privacy.html", [crumbs(("ראשי", ""), ("מדיניות פרטיות", "privacy.html"))]),
+ "accessibility.html": ("הצהרת נגישות | Studio Image Photography", "הצהרת הנגישות של האתר, ההתאמות שבוצעו ופרטי קשר לפניות בנושא נגישות.", "accessibility.html", [crumbs(("ראשי", ""), ("הצהרת נגישות", "accessibility.html"))]),
  "gallery.html": ("גלריית צילומים: פורטרטים, אירועים ונוף | Studio Image",
    "גלריית עבודות של Studio Image Photography: פורטרטים, חתונות ואירועים וצילומי נוף.", "gallery.html", [crumbs(("ראשי", ""), ("גלריה", "gallery.html"))]),
 }
@@ -99,7 +102,7 @@ for g in guides:
 
 # 3. sitemap + robots
 today = datetime.date.today().isoformat()
-urls = [""] + [p for p in ["gallery.html", "booking.html", "about.html", "contact.html"]] + [f"guide-{g['id']}.html" for g in guides]
+urls = [""] + [p for p in ["gallery.html", "booking.html", "about.html", "contact.html", "terms.html", "privacy.html", "accessibility.html"]] + [f"guide-{g['id']}.html" for g in guides]
 sm = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + "".join(
     f"  <url><loc>{BASE}{u}</loc><lastmod>{today}</lastmod></url>\n" for u in urls) + "</urlset>\n"
 old = open("sitemap.xml").read() if os.path.exists("sitemap.xml") else ""
